@@ -6,6 +6,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { ConfListComponent } from './content/conf-list/conf-list.component';
+import { GetConfListService } from './services/get-conf-list.service'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { ConfListComponent } from './content/conf-list/conf-list.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    GetConfListService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 {
   "name": "conf-mono",
   "version": "1.0.0",
-  "description": "Monorepo for conf.io app components",
+  "description": "Monorepo for conf.io components",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
