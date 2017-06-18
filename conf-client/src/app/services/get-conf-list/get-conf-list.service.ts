@@ -1,10 +1,10 @@
-import { Conf } from '../conf.class';
+import { Conf } from '../../conf.class';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GetConfListService {
 
-  getList(): Conf[] {
+  getList(): Promise<Conf[]> {
     let confs = [{
       name: "Test Conf",
       description: "Description",
@@ -15,7 +15,7 @@ export class GetConfListService {
       imgLink: "../../public/image/erlichConf.png",
       date: "June 15, 2017"
     }]
-    return confs;
+    return Promise.resolve(confs);
   }
 
 }

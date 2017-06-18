@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetConfListService } from '../../services/get-conf-list.service';
+import { GetConfListService } from '../../services/get-conf-list/get-conf-list.service';
 
 import { Conf } from '../../conf.class';
 
@@ -17,7 +17,7 @@ export class ConfListComponent implements OnInit {
   constructor(private getConfListService: GetConfListService) { }
 
   getConfList(): void {
-    this.confs = this.getConfListService.getList();
+    this.getConfListService.getList().then(confs => this.confs = confs);
   }
   ngOnInit(): void {
     this.getConfList();

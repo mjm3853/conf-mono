@@ -6,7 +6,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { ConfListComponent } from './content/conf-list/conf-list.component';
-import { GetConfListService } from './services/get-conf-list.service'
+import { GetConfListService } from './services/get-conf-list/get-conf-list.service'
 
 @NgModule({
   declarations: [
