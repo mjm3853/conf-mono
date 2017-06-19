@@ -1,0 +1,10 @@
+{
+    name: "Test Conf",
+    description: "Description",
+    tags: [
+        "angular",
+        "babel"
+    ],
+    imgLink: "../../public/image/erlichConf.png",
+    date: "June 15, 2017"
+}

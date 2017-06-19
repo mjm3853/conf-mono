@@ -12,6 +12,7 @@ var conf_index = require('./routes/conf_index'),
 
 var app = express();
 
+//database setup
 db.setup();
 
 // view engine setup

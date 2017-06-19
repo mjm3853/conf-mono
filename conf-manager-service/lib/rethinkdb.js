@@ -1,9 +1,6 @@
 var r = require('rethinkdb'),
     util = require('util'),
-    assert = require('assert'),
-    logdebug = require('debug')('rdb:debug'),
-    logerror = require('debug')('rdb:error');
-
+    assert = require('assert');
 
 // #### Connection details
 
@@ -20,31 +17,65 @@ var dbConfig = {
 /**
  * Connect to RethinkDB instance and perform a basic database setup:
  *
- * - create the `RDB_DB` database (defaults to `chat`)
- * - create tables `messages`, `cache`, `users` in this database
+ * - create the `RDB_DB` database (defaults to `conf`)
+ * - create table `confs` in this database
  */
 module.exports.setup = function() {
   r.connect({host: dbConfig.host, port: dbConfig.port }, function (err, connection) {
     assert.ok(err === null, err);
     r.dbCreate(dbConfig.db).run(connection, function(err, result) {
       if(err) {
-        logdebug("[DEBUG] RethinkDB database '%s' already exists (%s:%s)\n%s", dbConfig.db, err.name, err.msg, err.message);
+        console.log("[DEBUG] RethinkDB database '%s' already exists (%s:%s)\n%s", dbConfig.db, err.name, err.msg, err.message);
       }
       else {
-        logdebug("[INFO ] RethinkDB database '%s' created", dbConfig.db);
+        console.log("[INFO ] RethinkDB database '%s' created", dbConfig.db);
       }
-
       for(var tbl in dbConfig.tables) {
         (function (tableName) {
           r.db(dbConfig.db).tableCreate(tableName, {primaryKey: dbConfig.tables[tbl]}).run(connection, function(err, result) {
             if(err) {
-              logdebug("[DEBUG] RethinkDB table '%s' already exists (%s:%s)\n%s", tableName, err.name, err.msg, err.message);
+              console.log("[DEBUG] RethinkDB table '%s' already exists (%s:%s)\n%s", tableName, err.name, err.msg, err.message);
             }
             else {
-              logdebug("[INFO ] RethinkDB table '%s' created", tableName);
+              console.log("[INFO ] RethinkDB table '%s' created", tableName);
             }
           });
         })(tbl);
+      }
+    });
+  });
+};
+
+/**
+ * Gets a list of conferences equal to or less than the specified max_results
+ *
+ * @param {Number} max_results
+ *    Maximum number of results to be retrieved from the db
+ *
+ * @param {Function} callback
+ *    callback invoked after collecting all the results
+ *
+ * @returns {Array} an array of messages
+ */
+module.exports.getConferences = function (max_results, callback) {
+  onConnect(function (err, connection) {
+    r.db(dbConfig['db']).table('confs').limit(max_results).run(connection, function(err, cursor) {
+      if(err) {
+        console.log("[ERROR][%s][getConferences] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+        callback(null, []);
+        connection.close();
+      }
+      else {
+        cursor.toArray(function(err, results) {
+          if(err) {
+            console.log("[ERROR][%s][getConferences][toArray] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+            callback(null, []);
+          }
+          else {
+            callback(null, results);
+          }
+          connection.close();
+        });
       }
     });
   });

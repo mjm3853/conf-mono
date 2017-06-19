@@ -1,42 +1,17 @@
 var express = require('express');
 var router = express.Router();
-
-let mockConferences = [
-  {
-    name: "Test Conf",
-    description: "Description",
-    tags: [
-      "angular",
-      "babel"
-    ],
-    imgLink: "../../public/image/erlichConf.png",
-    date: "June 15, 2017"
-  },
-  {
-    name: "Second Conf",
-    description: "Description",
-    tags: [
-      "babel"
-    ],
-    imgLink: "../../public/image/erlichConf.png",
-    date: "June 16, 2017"
-  },
-  {
-    name: "Third Conf",
-    description: "This conference is about stuff",
-    tags: [
-      "angular",
-      "react"
-    ],
-    imgLink: "../../public/image/erlichConf.png",
-    date: "June 17, 2017"
-  }
-
-]
+var db = require('../lib/rethinkdb');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.send(mockConferences);
+  db.getConferences(5, function (err, results) {
+    if (err) {
+      res.send(500);
+      return;
+    } else {
+      res.send(results);
+    }
+  })
 });
 
 module.exports = router;

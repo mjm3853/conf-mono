@@ -1,0 +1,17 @@
+2017-06-19T10:30:52.436244155 0.173968s notice: Recursively removing directory /home/matt/projects/conf-mono/rethinkdb_data/tmp
+2017-06-19T10:30:52.443033643 0.180756s notice: Initializing directory /home/matt/projects/conf-mono/rethinkdb_data
+2017-06-19T10:30:52.443619616 0.181343s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/matt/projects/conf-mono/rethinkdb_data' did not already exist or is empty.)
+2017-06-19T10:30:52.443756775 0.181480s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-06-19T10:30:52.446731923 0.184458s notice: Running on Linux 4.4.0-79-generic x86_64
+2017-06-19T10:30:52.447172941 0.184896s notice: Loading data from directory /home/matt/projects/conf-mono/rethinkdb_data
+2017-06-19T10:30:52.553512378 0.291235s info: Automatically using cache size of 1984 MB
+2017-06-19T10:30:52.581283016 0.319006s notice: Listening for intracluster connections on port 29015
+2017-06-19T10:30:52.581969546 0.319692s notice: Listening for client driver connections on port 28015
+2017-06-19T10:30:52.582470448 0.320193s notice: Listening for administrative HTTP connections on port 8080
+2017-06-19T10:30:52.610174861 0.347898s notice: Listening on cluster addresses: 127.0.0.1, 172.17.0.1, 172.18.0.1, 172.19.0.1, 127.0.1.1, 192.168.122.1, 10.0.0.45, ::1, 2601:18d:8b7f:e320:c68e:8fff:fef5:e9ab, 2601:18d:8b7f:e320:ed63:58cb:29e7:4a54, 2601:18d:8b7f:e3ea::f4e7, fe80::c68e:8fff:fef5:e9ab%2
+2017-06-19T10:30:52.638255180 0.375978s notice: Listening on driver addresses: 127.0.0.1, 172.17.0.1, 172.18.0.1, 172.19.0.1, 127.0.1.1, 192.168.122.1, 10.0.0.45, ::1, 2601:18d:8b7f:e320:c68e:8fff:fef5:e9ab, 2601:18d:8b7f:e320:ed63:58cb:29e7:4a54, 2601:18d:8b7f:e3ea::f4e7, fe80::c68e:8fff:fef5:e9ab%2
+2017-06-19T10:30:52.666124044 0.403847s notice: Listening on http addresses: 127.0.0.1, 172.17.0.1, 172.18.0.1, 172.19.0.1, 127.0.1.1, 192.168.122.1, 10.0.0.45, ::1, 2601:18d:8b7f:e320:c68e:8fff:fef5:e9ab, 2601:18d:8b7f:e320:ed63:58cb:29e7:4a54, 2601:18d:8b7f:e3ea::f4e7, fe80::c68e:8fff:fef5:e9ab%2
+2017-06-19T10:30:52.666132970 0.403855s notice: Server ready, "matt_XPS_13_9343_u67" 95859964-6c33-4814-9ce9-9a82c8f6bf8a
+2017-06-19T10:33:23.292573884 151.030297s info: Table 2babbb7b-dba4-4083-8f5b-87c175f63cf1: Starting a new Raft election for term 1.
+2017-06-19T10:33:23.292960502 151.030683s info: Table 2babbb7b-dba4-4083-8f5b-87c175f63cf1: Added replica on this server.
+2017-06-19T10:33:23.303306238 151.041029s info: Table 2babbb7b-dba4-4083-8f5b-87c175f63cf1: This server is Raft leader for term 1. Latest log index is 0.
