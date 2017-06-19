@@ -1,15 +1,18 @@
-var express = require('express');
-var cors = require('cors')
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express = require('express'),
+    cors = require('cors'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    db = require('./lib/rethinkdb')
 
-var conf_index = require('./routes/conf_index');
-var conf_get = require('./routes/conf_get');
+var conf_index = require('./routes/conf_index'),
+    conf_get = require('./routes/conf_get');
 
 var app = express();
+
+db.setup();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
