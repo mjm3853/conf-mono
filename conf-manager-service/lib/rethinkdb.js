@@ -1,7 +1,7 @@
 var r = require('rethinkdb'),
   util = require('util'),
   assert = require('assert'),
-  logger = require('morgan');
+  logger = require('./logger');
 
 // #### Connection details
 
@@ -23,21 +23,22 @@ var dbConfig = {
  */
 module.exports.setup = function () {
   r.connect({ host: dbConfig.host, port: dbConfig.port }).then(function (connection) {
+    logger.info("[db][setup] RethinkDB connection successful")
     r.dbCreate(dbConfig.db).run(connection, function (err, result) {
       if (err) {
-        console.log("[DEBUG] RethinkDB database '%s' already exists (%s:%s)\n%s", dbConfig.db, err.name, err.msg, err.message);
+        logger.info("[db][setup] RethinkDB database '%s' already exists", dbConfig.db);
       }
       else {
-        console.log("[INFO ] RethinkDB database '%s' created", dbConfig.db);
+        logger.info("[db][setup] RethinkDB database '%s' created", dbConfig.db);
       }
       for (var tbl in dbConfig.tables) {
         (function (tableName) {
           r.db(dbConfig.db).tableCreate(tableName, { primaryKey: dbConfig.tables[tbl] }).run(connection, function (err, result) {
             if (err) {
-              console.log("[DEBUG] RethinkDB table '%s' already exists (%s:%s)\n%s", tableName, err.name, err.msg, err.message);
+              logger.info("[db][setup] RethinkDB table '%s' already exists", tableName);
             }
             else {
-              console.log("[INFO ] RethinkDB table '%s' created", tableName);
+              logger.info("[db][setup] RethinkDB table '%s' created", tableName);
             }
           });
         })(tbl);
@@ -64,16 +65,16 @@ module.exports.getConferences = function (max_results, callback) {
     if (err) {
       callback(err, null);
     } else {
-      r.db(dbConfig['db']).table('confs').limit(max_results).run(connection, function (err, cursor) {
+      r.db(dbConfig['db']).table('confs').limit(Number(max_results)).run(connection, function (err, cursor) {
         if (err) {
-          console.log("[ERROR][%s][getConferences] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+          logger.error("[db][getConferences] %s:%s\n%s", err.name, err.msg, err.message);
           callback(null, []);
           connection.close();
         }
         else {
           cursor.toArray(function (err, results) {
             if (err) {
-              console.log("[ERROR][%s][getConferences][toArray] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+              logger.error("[db][getConferences][toArray] %s:%s\n%s", err.name, err.msg, err.message);
               callback(null, []);
             }
             else {
