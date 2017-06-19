@@ -61,7 +61,7 @@ module.exports.setup = function () {
  * @returns {Array} an array of messages
  */
 module.exports.getConferences = function (max_results, callback) {
-  onConnectWithPromise(function (err, connection) {
+  onConnect(function (err, connection) {
     if (err) {
       callback(err, null);
     } else {
@@ -96,18 +96,6 @@ module.exports.getConferences = function (max_results, callback) {
  * and fail fast in case of a connection error.
  */
 function onConnect(callback) {
-  r.connect({ host: dbConfig.host, port: dbConfig.port }, function (err, connection) {
-    //assert.ok(err === null, err);
-    if (connection) {
-      connection['_id'] = Math.floor(Math.random() * 10001);
-      callback(null, connection);
-    } else {
-      callback(err, null);
-    }
-  });
-}
-
-function onConnectWithPromise(callback) {
   r.connect({ host: dbConfig.host, port: dbConfig.port }).then(function (connection) {
     callback(null, connection);
   }).catch(function (err) {
