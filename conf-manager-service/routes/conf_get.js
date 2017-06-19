@@ -11,6 +11,16 @@ let mockConferences = [
     ],
     imgLink: "../../public/image/erlichConf.png",
     date: "June 15, 2017"
+  },
+    {
+    name: "Second Conf",
+    description: "Description",
+    tags: [
+      "a",
+      "b"
+    ],
+    imgLink: "../../public/image/erlichConf.png",
+    date: "June 16, 2017"
   }
 ]
 

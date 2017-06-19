@@ -12,12 +12,18 @@ import { Conf } from '../../conf.class';
   styleUrls: ['./conf-list.component.css']
 })
 export class ConfListComponent implements OnInit {
+  errorMessage: string;
   confs: Conf[];
+  mode = 'Observable';
 
   constructor(private getConfListService: GetConfListService) { }
 
   getConfList(): void {
-    this.getConfListService.getList().then(confs => this.confs = confs);
+    this.getConfListService.getList()
+      .subscribe(
+      confs => this.confs = confs,
+      error => this.errorMessage = <any>error
+      );
   }
   ngOnInit(): void {
     this.getConfList();

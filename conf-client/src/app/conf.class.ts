@@ -4,5 +4,4 @@ export class Conf {
     tags: string[];
     imgLink: string;
     date: string;
-
 }
