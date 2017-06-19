@@ -1,7 +1,10 @@
 <!--The whole content below can be removed with the new code.-->
-<md-toolbar>
-  <span><h1>{{title}}</h1></span>
-  <span id="fill-nav-space"></span>
-  <span>beta</span>
-</md-toolbar>
-<app-conf-list></app-conf-list>
+<md-sidenav-container fullscreen>
+  <md-toolbar class="global-header">
+    <span><h1>{{title}}</h1></span>
+    <span id="fill-nav-space"></span>
+    <span>beta</span>
+    <md-sidenav></md-sidenav>
+  </md-toolbar>
+  <app-conf-list></app-conf-list>
+</md-sidenav-container>
