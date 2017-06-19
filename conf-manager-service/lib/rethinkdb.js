@@ -1,6 +1,7 @@
 var r = require('rethinkdb'),
   util = require('util'),
-  assert = require('assert');
+  assert = require('assert'),
+  logger = require('morgan');
 
 // #### Connection details
 
