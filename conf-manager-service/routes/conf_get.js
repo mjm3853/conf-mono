@@ -6,8 +6,7 @@ var db = require('../lib/rethinkdb');
 router.get('/', function (req, res, next) {
   db.getConferences(5, function (err, results) {
     if (err) {
-      res.send(500);
-      return;
+      res.status(500).send(err);
     } else {
       res.send(results);
     }

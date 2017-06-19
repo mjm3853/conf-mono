@@ -59,26 +59,30 @@ module.exports.setup = function () {
  * @returns {Array} an array of messages
  */
 module.exports.getConferences = function (max_results, callback) {
-  onConnect(function (err, connection) {
-    r.db(dbConfig['db']).table('confs').limit(max_results).run(connection, function (err, cursor) {
-      if (err) {
-        console.log("[ERROR][%s][getConferences] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
-        callback(null, []);
-        connection.close();
-      }
-      else {
-        cursor.toArray(function (err, results) {
-          if (err) {
-            console.log("[ERROR][%s][getConferences][toArray] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
-            callback(null, []);
-          }
-          else {
-            callback(null, results);
-          }
+  onConnectWithPromise(function (err, connection) {
+    if (err) {
+      callback(err, null);
+    } else {
+      r.db(dbConfig['db']).table('confs').limit(max_results).run(connection, function (err, cursor) {
+        if (err) {
+          console.log("[ERROR][%s][getConferences] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+          callback(null, []);
           connection.close();
-        });
-      }
-    });
+        }
+        else {
+          cursor.toArray(function (err, results) {
+            if (err) {
+              console.log("[ERROR][%s][getConferences][toArray] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+              callback(null, []);
+            }
+            else {
+              callback(null, results);
+            }
+            connection.close();
+          });
+        }
+      });
+    }
   });
 };
 
@@ -91,8 +95,20 @@ module.exports.getConferences = function (max_results, callback) {
  */
 function onConnect(callback) {
   r.connect({ host: dbConfig.host, port: dbConfig.port }, function (err, connection) {
-    assert.ok(err === null, err);
-    connection['_id'] = Math.floor(Math.random() * 10001);
-    callback(err, connection);
+    //assert.ok(err === null, err);
+    if (connection) {
+      connection['_id'] = Math.floor(Math.random() * 10001);
+      callback(null, connection);
+    } else {
+      callback(err, null);
+    }
   });
+}
+
+function onConnectWithPromise(callback) {
+  r.connect({ host: dbConfig.host, port: dbConfig.port }).then(function (connection) {
+    callback(null, connection);
+  }).catch(function (err) {
+    callback(err, null)
+  })
 }
