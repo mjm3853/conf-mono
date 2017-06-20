@@ -1,6 +1,48 @@
 <md-card>
   <md-card-title>Create a Conference</md-card-title>
   <md-card-content>
-    <p>Test</p>
+    <p>
+      <md-input-container>
+        <input mdInput placeholder="Conference Name">
+      </md-input-container>
+    </p>
+    <p>
+      <md-input-container>
+        <textarea mdInput placeholder="Description"></textarea>
+      </md-input-container>
+    </p>
+    <table cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container>
+            <input mdInput placeholder="City">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container>
+            <input mdInput placeholder="State">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container>
+            <input mdInput #postalCode maxlength="5" placeholder="Postal Code">
+            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <md-input-container>
+        <input mdInput [mdDatepicker]="picker" placeholder="Date">
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+      </md-input-container>
+      <md-datepicker #picker>
+      </md-datepicker>
+      <p>
+        <p>
+          <md-input-container>
+            <input mdInput placeholder="Tag">
+          </md-input-container>
+        </p>
   </md-card-content>
 </md-card>
