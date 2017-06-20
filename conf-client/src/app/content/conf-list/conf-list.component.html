@@ -1,10 +1,17 @@
 <div id="content">
   <md-card *ngFor="let conf of confs">
-    <md-card-title>{{conf.name}}</md-card-title>
+    <md-card-title>{{conf.name}}
+      <span *ngIf="conf.url">
+        <button md-icon-button>
+          <a href="{{conf.url}}" target="_blank"><i class="material-icons">open_in_new</i></a>
+        </button>
+      </span>
+    </md-card-title>
     <md-card-subtitle>{{conf.description}}</md-card-subtitle>
     <md-card-content>
       <p>{{conf.location}}</p>
       <p>{{conf.date}}</p>
+      <p></p>
       <md-chip-list>
         <md-chip *ngFor="let tag of conf.tags">{{tag}}</md-chip>
       </md-chip-list>

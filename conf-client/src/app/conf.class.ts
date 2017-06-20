@@ -3,5 +3,6 @@ export class Conf {
     description: string;
     location: string;
     date: string;
+    url: string;
     tags: string[];
 }
