@@ -1,12 +1,14 @@
-<md-card *ngFor="let conf of confs">
-  <md-card-title>{{conf.name}}</md-card-title>
-  <md-card-subtitle>{{conf.description}}</md-card-subtitle>
-  <md-card-content>
-    <p>{{conf.location}}</p>
-    <p>{{conf.date}}</p>
-    <p>Tags</p>
-    <md-chip-list>
-      <md-chip *ngFor="let tag of conf.tags">{{tag}}</md-chip>
-    </md-chip-list>
-  </md-card-content>
-</md-card>
+<div id="content">
+  <md-card *ngFor="let conf of confs">
+    <md-card-title>{{conf.name}}</md-card-title>
+    <md-card-subtitle>{{conf.description}}</md-card-subtitle>
+    <md-card-content>
+      <p>{{conf.location}}</p>
+      <p>{{conf.date}}</p>
+      <p>Tags</p>
+      <md-chip-list>
+        <md-chip *ngFor="let tag of conf.tags">{{tag}}</md-chip>
+      </md-chip-list>
+    </md-card-content>
+  </md-card>
+</div>
