@@ -5,8 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db": "rethinkdb --bind all"
+    "db": "rethinkdb --bind all",
+    "devServer": "cd conf-manager-service && npm start",
+    "devClient": "cd conf-client && ng serve",
+    "devAll": "concurrently \"npm run db\" \"npm run devServer\" \"npm run devClient\""
   },
   "author": "Matt McGrath",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.4.0"
+  }
 }
