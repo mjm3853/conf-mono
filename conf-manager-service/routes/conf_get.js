@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../lib/rethinkdb');
 var logger = require('../lib/logger');
 
-/* GET home page. */
+/* GET conference list. */
 router.get('/conferences', function (req, res, next) {
   var max_count = 5;
   if (req.query.count) {

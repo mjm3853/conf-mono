@@ -8,7 +8,8 @@ var express = require('express'),
     db = require('./lib/rethinkdb');
 
 var conf_index = require('./routes/conf_index'),
-    conf_get = require('./routes/conf_get');
+    conf_get = require('./routes/conf_get'),
+    conf_create = require('./routes/conf_create');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(cors());
 
 app.use('/api/conf', conf_index);
 app.use('/api/conf/get', conf_get);
+app.use('/api/conf/create', conf_create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

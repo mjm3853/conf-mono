@@ -88,6 +88,37 @@ module.exports.getConferences = function (max_results, callback) {
   });
 };
 
+/**
+ * Creates a conference with given details
+ *
+ * @param conference_details
+ *    details of the conference to be created
+ *
+ * @param {Function} callback
+ *    callback invoked after collecting all the results
+ *
+ * @returns {Array} an array of messages
+ */
+module.exports.createConference = function (conference_details, callback) {
+  onConnect(function (err, connection) {
+    r.db(dbConfig['db']).table('confs').insert(conference_details).run(connection, function(err, result) {
+      if(err) {
+        logerror("[ERROR][%s][saveMessage] %s:%s\n%s", connection['_id'], err.name, err.msg, err.message);
+        callback(err);
+      }
+      else {
+        if(result.inserted === 1) {
+          callback(null, true);
+        }
+        else {
+          callback(null, false);
+        }
+      }
+      connection.close();
+    });
+  });
+};
+
 // #### Helper functions
 
 /**
