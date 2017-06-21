@@ -7,6 +7,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { GetConfListService } from './services/get-conf-list/get-conf-list.service';
+import { CreateConfService } from './services/create-conf/create-conf.service';
 import { ConfListComponent } from './content/conf-list/conf-list.component';
 import { ConfCreateComponent } from './content/conf-create/conf-create.component';
 
@@ -26,7 +27,8 @@ import { ConfCreateComponent } from './content/conf-create/conf-create.component
     MdNativeDateModule
   ],
   providers: [
-    GetConfListService
+    GetConfListService,
+    CreateConfService
   ],
   bootstrap: [AppComponent]
 })

@@ -3,19 +3,9 @@ var router = express.Router();
 var db = require('../lib/rethinkdb');
 var logger = require('../lib/logger');
 
-/* Creat Conference. */
+/* Create Conference. */
 router.post('/conference', function (req, res, next) {
-  var conference_details = {
-    name: "Another Mock Auto Created Again",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    location: "Manchester, NH",
-    tags: [
-      "react",
-      "redux"
-    ],
-    url: "https://en.wikipedia.org/wiki/Conference",
-    date: "September 25, 2017"
-  }
+  var conference_details = req.body;
   db.createConference(conference_details, function (err, outcome) {
     if (err) {
       logger.error("[db][createConference] Failed to create conference due to:", err);
