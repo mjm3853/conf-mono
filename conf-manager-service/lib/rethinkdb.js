@@ -65,7 +65,7 @@ module.exports.getConferences = function (max_results, callback) {
     if (err) {
       callback(err, null);
     } else {
-      r.db(dbConfig['db']).table('confs').limit(Number(max_results)).run(connection, function (err, cursor) {
+      r.db(dbConfig['db']).table('confs').orderBy('date').limit(Number(max_results)).run(connection, function (err, cursor) {
         if (err) {
           logger.error("[db][getConferences] %s:%s\n%s", err.name, err.msg, err.message);
           callback(null, []);
