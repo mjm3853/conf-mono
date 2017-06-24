@@ -29,13 +29,14 @@ export class ConfCreateComponent implements OnInit {
     var conference_details = {
       name: this.model.name,
       description: this.model.description,
-      location: "Manchester, NH",
+      city: this.model.city,
+      state: this.model.state,
+      zip: this.model.zip,
       tags: [
-        "react",
-        "redux"
+        this.model.tags
       ],
-      url: "https://en.wikipedia.org/wiki/Conference",
-      date: "October 25, 2017"
+      url: this.model.url,
+      date: this.model.date
     }
     this.createConfService.createConf(conference_details)
       .subscribe(

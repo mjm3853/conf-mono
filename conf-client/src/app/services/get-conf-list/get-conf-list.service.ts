@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GetConfListService {
-  private confUrl = 'http://127.0.0.1:3000/api/conf/get/conferences?count=10';
+  private confUrl = 'http://127.0.0.1:3000/api/conf/get/conferences?count=200';
 
   constructor(private http: Http) { }
 
