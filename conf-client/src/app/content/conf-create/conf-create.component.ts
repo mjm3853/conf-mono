@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateConfService } from '../../services/create-conf/create-conf.service';
+import { GetConfListService } from '../../services/get-conf-list/get-conf-list.service';
 
 import { Conf } from '../../conf.class';
 
@@ -10,7 +11,9 @@ import { Conf } from '../../conf.class';
 })
 export class ConfCreateComponent implements OnInit {
 
-  constructor(private createConfService: CreateConfService) { }
+  constructor(
+    private createConfService: CreateConfService,
+    private getConfService: GetConfListService) { }
 
   model = new Conf();
   response: any;

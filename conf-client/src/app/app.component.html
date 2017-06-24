@@ -4,6 +4,8 @@
   <span id="fill-nav-space"></span>
   <span>alpha</span>
 </md-toolbar>
+
+<!--
 <div id="content">
   <md-tab-group id="tabs">
     <md-tab label="List">
@@ -14,3 +16,15 @@
     </md-tab>
   </md-tab-group>
 </div>
+-->
+
+<nav md-tab-nav-bar id="content">
+  <a md-tab-link routerLink="/list" routerLinkActive="active">
+    List
+  </a>
+  <a md-tab-link routerLink="/create" routerLinkActive="active">
+    Create
+  </a>
+</nav>
+
+<router-outlet></router-outlet>
