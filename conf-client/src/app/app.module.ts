@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { FormsModule }   from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 
@@ -24,7 +25,8 @@ import { ConfCreateComponent } from './content/conf-create/conf-create.component
     HttpModule,
     JsonpModule,
     MdDatepickerModule, 
-    MdNativeDateModule
+    MdNativeDateModule,
+    FormsModule
   ],
   providers: [
     GetConfListService,

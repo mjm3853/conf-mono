@@ -1,49 +1,53 @@
 <md-card>
   <md-card-title>Create a Conference</md-card-title>
-  <md-card-content>
-    <p>
-      <md-input-container>
-        <input mdInput placeholder="Conference Name">
-      </md-input-container>
-    </p>
-    <p>
-      <md-input-container>
-        <textarea mdInput placeholder="Description"></textarea>
-      </md-input-container>
-    </p>
-    <table cellspacing="0">
-      <tr>
-        <td>
-          <md-input-container>
-            <input mdInput placeholder="City">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container>
-            <input mdInput placeholder="State">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container>
-            <input mdInput #postalCode maxlength="5" placeholder="Postal Code">
-            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-          </md-input-container>
-        </td>
-      </tr>
-    </table>
-    <p>
-      <md-input-container>
-        <input mdInput [mdDatepicker]="picker" placeholder="Date">
-        <button mdSuffix [mdDatepickerToggle]="picker"></button>
-      </md-input-container>
-      <md-datepicker #picker>
-      </md-datepicker>
+  <form #confForm="ngForm" (ngSubmit)="submitForm()">
+    <md-card-content>
       <p>
+        <md-input-container class="form-group">
+          <input mdInput placeholder="Conference Name" [(ngModel)]="model.name" class="form-control" id="name" name="name">
+        </md-input-container>
+      </p>
+      <p>
+        <md-input-container class="form-group">
+          <textarea mdInput placeholder="Description" [(ngModel)]="model.description" class="form-control" id="description" name="description"></textarea>
+        </md-input-container>
+      </p>
+      <table cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="form-group">
+              <input mdInput placeholder="City" [(ngModel)]="model.confCity" class="form-control" id="confCity" name="confCity">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="form-group">
+              <input mdInput placeholder="State" [(ngModel)]="model.confState" class="form-control" id="confState" name="confState">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="form-group">
+              <input mdInput #postalCode maxlength="5" placeholder="Postal Code" [(ngModel)]="model.confZipCode" class="form-control" id="confZipCode" name="confZipCode">
+              <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+            </md-input-container>
+          </td>
+        </tr>
+      </table>
+      <p>
+        <md-input-container class="form-group">
+          <input mdInput [mdDatepicker]="picker" placeholder="Date" [(ngModel)]="model.confDate" class="form-control" id="confDate" name="confDate">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker>
+        </md-datepicker>
         <p>
-          <md-input-container>
-            <input mdInput placeholder="Tag">
-          </md-input-container>
-        </p>
-        <button md-raised-button>Submit</button>
-  </md-card-content>
+          <p>
+            <md-input-container class="form-group">
+              <input mdInput placeholder="Tag" [(ngModel)]="model.confTag" class="form-control" id="confTag" name="confTag">
+            </md-input-container>
+          </p>
+          <button type="submit" md-raised-button>Submit</button>
+          <button type="button" md-raised-button (click)="resetForm()">Reset</button>
+    </md-card-content>
+  </form>
 </md-card>
+{{diagnostic}}

@@ -6,18 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-var conference_details = {
-  name: "Client Mock Auto Created",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  location: "Manchester, NH",
-  tags: [
-    "react",
-    "redux"
-  ],
-  url: "https://en.wikipedia.org/wiki/Conference",
-  date: "October 25, 2017"
-}
-
 @Injectable()
 export class CreateConfService {
   private confUrl = 'http://127.0.0.1:3000/api/conf/create/conference';
