@@ -46,6 +46,7 @@ export class ConfCreateComponent implements OnInit {
     'Colorado',
     'Connecticut',
     'Delaware',
+    'District of Columbia',
     'Florida',
     'Georgia',
     'Hawaii',
@@ -89,8 +90,6 @@ export class ConfCreateComponent implements OnInit {
     'Wisconsin',
     'Wyoming',
   ];
-
-  get diagnostic() { return JSON.stringify(this.model); }
 
   submitted = false;
 
