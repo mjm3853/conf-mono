@@ -20,6 +20,32 @@ export class GetConfListService {
 
   private processResponse(res: Response) {
     let body = res.json();
+    body.forEach(element => {
+      if (element.date) {
+        let date = new Date(element.date)
+
+        let day = date.toISOString().slice(8,10);
+        let year = date.getFullYear();
+
+        let month = new Array();
+        month[0] = "January";
+        month[1] = "February";
+        month[2] = "March";
+        month[3] = "April";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "August";
+        month[8] = "September";
+        month[9] = "October";
+        month[10] = "November";
+        month[11] = "December";
+
+        let monthName = month[date.getMonth()];
+
+        element.date = monthName + " " + day + ", " + year;
+      }
+    });
     return body || [];
   }
 
