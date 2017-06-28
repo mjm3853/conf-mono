@@ -6,5 +6,5 @@ export class Conf {
     zip: string;
     date: string;
     url: string;
-    tags: string[];
+    tags: Array<string>;
 }

@@ -18,6 +18,14 @@ export class ConfCreateComponent implements OnInit {
 
   stateCtrl: FormControl;
   filteredStates: any;
+  inputTag: string;
+  tags: string[] = [];
+
+  model = new Conf();
+  response: any;
+  error: any;
+
+  submitted = false;
 
   constructor(
     private createConfService: CreateConfService,
@@ -32,10 +40,6 @@ export class ConfCreateComponent implements OnInit {
     return val ? this.states.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
       : this.states;
   }
-
-  model = new Conf();
-  response: any;
-  error: any;
 
   states = [
     'Alabama',
@@ -91,8 +95,6 @@ export class ConfCreateComponent implements OnInit {
     'Wyoming',
   ];
 
-  submitted = false;
-
   resetForm() {
     this.model = new Conf();
   }
@@ -105,9 +107,7 @@ export class ConfCreateComponent implements OnInit {
       city: this.model.city,
       state: this.model.state,
       zip: this.model.zip,
-      tags: [
-        this.model.tags
-      ],
+      tags: this.model.tags,
       url: this.model.url,
       date: this.model.date
     }
@@ -119,7 +119,14 @@ export class ConfCreateComponent implements OnInit {
     this.resetForm();
   }
 
+  pushTag() {
+    this.model.tags.push(this.inputTag);
+    console.log(this.model.tags);
+    this.inputTag = "";
+  }
+
   ngOnInit() {
+    this.model.tags = [];
 
   }
 
