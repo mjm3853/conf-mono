@@ -20,15 +20,15 @@
             </md-input-container>
           </td>
           <td>
-            <md-input-container class="form-group">
-              <input mdInput placeholder="State" [(ngModel)]="model.state" class="form-control" id="state" name="state">
+            <md-input-container>
+              <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl" [(ngModel)]="model.state" id="state" name="state">
             </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="form-group">
-              <input mdInput #postalCode maxlength="5" placeholder="Postal Code" [(ngModel)]="model.zip" class="form-control" id="zip" name="zip">
-              <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-            </md-input-container>
+
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let state of filteredStates | async" [value]="state">
+                {{ state }}
+              </md-option>
+            </md-autocomplete>
           </td>
         </tr>
       </table>

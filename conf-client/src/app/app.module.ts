@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
@@ -38,7 +38,8 @@ const appRoutes: Routes = [
     JsonpModule,
     MdDatepickerModule, 
     MdNativeDateModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     GetConfListService,
