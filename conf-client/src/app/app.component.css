@@ -18,3 +18,8 @@
 #content {
     margin-top: 64px;
 }
+
+nav a.active {
+    color: black;
+    border-bottom: solid #311b92;
+}
