@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash af0a67a5390f1f7d24088ea9c3eef504
+ * @relayHash 775cda7909e5347e1dbb7346aadb2339
  */
 
 /* eslint-disable */
@@ -27,8 +27,8 @@ fragment ListConferences_viewer on Viewer {
   allConferences(last: 100, orderBy: createdAt_DESC) {
     edges {
       node {
-        ...Conference_conference
         id
+        ...Conference_conference
       }
     }
     ... on ConferenceConnection {
@@ -52,6 +52,22 @@ fragment ListConferences_viewer on Viewer {
 fragment Conference_conference on Conference {
   id
   name
+  description
+  start
+  end
+  location {
+    city
+    state
+    id
+  }
+  tags {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 */
 
@@ -163,6 +179,106 @@ const batch /*: ConcreteBatch*/ = {
                                 "alias": null,
                                 "args": null,
                                 "name": "name",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "description",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "start",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "end",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Location",
+                                "name": "location",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "city",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "state",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "id",
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "TagConnection",
+                                "name": "tags",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "LinkedField",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "TagEdge",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": [
+                                      {
+                                        "kind": "LinkedField",
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Tag",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": [
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "id",
+                                            "storageKey": null
+                                          },
+                                          {
+                                            "kind": "ScalarField",
+                                            "alias": null,
+                                            "args": null,
+                                            "name": "name",
+                                            "storageKey": null
+                                          }
+                                        ],
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  }
+                                ],
                                 "storageKey": null
                               }
                             ]
@@ -286,7 +402,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppAllConferenceQuery {\n  viewer {\n    ...ListConferences_viewer\n    id\n  }\n}\n\nfragment ListConferences_viewer on Viewer {\n  allConferences(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...Conference_conference\n        id\n      }\n    }\n    ... on ConferenceConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Conference_conference on Conference {\n  id\n  name\n}\n"
+  "text": "query AppAllConferenceQuery {\n  viewer {\n    ...ListConferences_viewer\n    id\n  }\n}\n\nfragment ListConferences_viewer on Viewer {\n  allConferences(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Conference_conference\n      }\n    }\n    ... on ConferenceConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Conference_conference on Conference {\n  id\n  name\n  description\n  start\n  end\n  location {\n    city\n    state\n    id\n  }\n  tags {\n    edges {\n      node {\n        id\n        name\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

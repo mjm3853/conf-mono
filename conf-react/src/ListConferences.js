@@ -25,6 +25,7 @@ export default createFragmentContainer(ListConferences, graphql`
         allConferences(last: 100, orderBy: createdAt_DESC) @connection(key: "ListConferences_allConferences", filters: []) {
             edges {
                 node {
+                    id
                     ...Conference_conference
                 }
             }
