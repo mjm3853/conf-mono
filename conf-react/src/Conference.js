@@ -14,6 +14,8 @@ class Conference extends React.Component {
                     {this.props.conference.name}
                     <p>{this.props.conference.description}</p>
                     <p>{this.props.conference.location.city}, {this.props.conference.location.state}</p>
+                    <p>Start: {this.props.conference.start}</p>
+                    <p>End: {this.props.conference.end}</p>
                     <p>Tags</p>
                     <ul>{this.props.conference.tags.edges.map(({node}) => 
                         <li key={node.id}>{node.name}</li>
