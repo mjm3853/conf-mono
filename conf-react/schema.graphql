@@ -1,0 +1,2077 @@
+input AddToConferenceAtLocationConferenceInput {
+  locationLocationId: ID!
+  conferencesConferenceId: ID!
+  clientMutationId: String!
+}
+
+type AddToConferenceAtLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conferencesConference: Conference
+  locationLocation: Location
+  conferencesConferenceEdge: ConferenceEdge
+  locationLocationEdge: LocationEdge
+}
+
+input AddToTagsForConferencesConferenceInput {
+  tagsTagId: ID!
+  conferencesConferenceId: ID!
+  clientMutationId: String!
+}
+
+type AddToTagsForConferencesPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conferencesConference: Conference
+  tagsTag: Tag
+  conferencesConferenceEdge: ConferenceEdge
+  tagsTagEdge: TagEdge
+}
+
+# The `BigDecimal` scalar type represents signed fractional values with arbitrary precision.
+scalar BigDecimal
+
+# The `BigInt` scalar type represents non-fractional signed whole numeric values. BigInt can represent arbitrary big values.
+scalar BigInt
+
+type Conference implements Node {
+  createdAt: DateTime!
+  description: String!
+  end: DateTime!
+  id: ID!
+  location(filter: LocationFilter): Location
+  name: String!
+  start: DateTime!
+  tags(filter: TagFilter, orderBy: TagOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): TagConnection
+  updatedAt: DateTime!
+  url: String
+}
+
+# A connection to a list of items.
+type ConferenceConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ConferenceEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type ConferenceEdge {
+  # The item at the end of the edge.
+  node: Conference!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input ConferenceFilter {
+  # Logical AND on all given filters.
+  AND: [ConferenceFilter!]
+
+  # Logical OR on all given filters.
+  OR: [ConferenceFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  description: String
+
+  # All values that are not equal to given value.
+  description_not: String
+
+  # All values that are contained in given list.
+  description_in: [String!]
+
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+
+  # All values less than the given value.
+  description_lt: String
+
+  # All values less than or equal the given value.
+  description_lte: String
+
+  # All values greater than the given value.
+  description_gt: String
+
+  # All values greater than or equal the given value.
+  description_gte: String
+
+  # All values containing the given string.
+  description_contains: String
+
+  # All values not containing the given string.
+  description_not_contains: String
+
+  # All values starting with the given string.
+  description_starts_with: String
+
+  # All values not starting with the given string.
+  description_not_starts_with: String
+
+  # All values ending with the given string.
+  description_ends_with: String
+
+  # All values not ending with the given string.
+  description_not_ends_with: String
+  end: DateTime
+
+  # All values that are not equal to given value.
+  end_not: DateTime
+
+  # All values that are contained in given list.
+  end_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  end_not_in: [DateTime!]
+
+  # All values less than the given value.
+  end_lt: DateTime
+
+  # All values less than or equal the given value.
+  end_lte: DateTime
+
+  # All values greater than the given value.
+  end_gt: DateTime
+
+  # All values greater than or equal the given value.
+  end_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  start: DateTime
+
+  # All values that are not equal to given value.
+  start_not: DateTime
+
+  # All values that are contained in given list.
+  start_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  start_not_in: [DateTime!]
+
+  # All values less than the given value.
+  start_lt: DateTime
+
+  # All values less than or equal the given value.
+  start_lte: DateTime
+
+  # All values greater than the given value.
+  start_gt: DateTime
+
+  # All values greater than or equal the given value.
+  start_gte: DateTime
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  url: String
+
+  # All values that are not equal to given value.
+  url_not: String
+
+  # All values that are contained in given list.
+  url_in: [String!]
+
+  # All values that are not contained in given list.
+  url_not_in: [String!]
+
+  # All values less than the given value.
+  url_lt: String
+
+  # All values less than or equal the given value.
+  url_lte: String
+
+  # All values greater than the given value.
+  url_gt: String
+
+  # All values greater than or equal the given value.
+  url_gte: String
+
+  # All values containing the given string.
+  url_contains: String
+
+  # All values not containing the given string.
+  url_not_contains: String
+
+  # All values starting with the given string.
+  url_starts_with: String
+
+  # All values not starting with the given string.
+  url_not_starts_with: String
+
+  # All values ending with the given string.
+  url_ends_with: String
+
+  # All values not ending with the given string.
+  url_not_ends_with: String
+  location: LocationFilter
+  tags_every: TagFilter
+  tags_some: TagFilter
+  tags_none: TagFilter
+}
+
+input ConferencelocationLocation {
+  address: String
+  city: String!
+  country: String
+  name: String
+  postalCode: String
+  state: String!
+  url: String
+  conferencesIds: [ID!]
+  conferences: [ConferencelocationLocationconferencesConference!]
+}
+
+input ConferencelocationLocationconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  tagsIds: [ID!]
+  tags: [ConferencelocationLocationconferencesConferencetagsTag!]
+}
+
+input ConferencelocationLocationconferencesConferencetagsTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+}
+
+enum ConferenceOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  description_ASC
+  description_DESC
+  end_ASC
+  end_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  start_ASC
+  start_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+input ConferencetagsTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+  conferences: [ConferencetagsTagconferencesConference!]
+}
+
+input ConferencetagsTagconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  location: ConferencetagsTagconferencesConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [ConferencetagsTagconferencesConferencetagsTag!]
+}
+
+input ConferencetagsTagconferencesConferencelocationLocation {
+  address: String
+  city: String!
+  country: String
+  name: String
+  postalCode: String
+  state: String!
+  url: String
+  conferencesIds: [ID!]
+}
+
+input ConferencetagsTagconferencesConferencetagsTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+}
+
+input CreateConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  location: ConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [ConferencetagsTag!]
+}
+
+input CreateConferenceInput {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  location: ConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [ConferencetagsTag!]
+  clientMutationId: String!
+}
+
+type CreateConferencePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conference: Conference
+  edge: ConferenceEdge
+  location: Location
+}
+
+input CreateFile {
+  name: String!
+}
+
+input CreateFileInput {
+  name: String!
+  clientMutationId: String!
+}
+
+type CreateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input CreateLocation {
+  address: String
+  city: String!
+  country: String
+  name: String
+  postalCode: String
+  state: String!
+  url: String
+  conferencesIds: [ID!]
+  conferences: [LocationconferencesConference!]
+}
+
+input CreateLocationInput {
+  address: String
+  city: String!
+  country: String
+  name: String
+  postalCode: String
+  state: String!
+  url: String
+  conferencesIds: [ID!]
+  conferences: [LocationconferencesConference!]
+  clientMutationId: String!
+}
+
+type CreateLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  location: Location
+  edge: LocationEdge
+}
+
+input CreateTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConference!]
+}
+
+input CreateTagInput {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConference!]
+  clientMutationId: String!
+}
+
+type CreateTagPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  tag: Tag
+  edge: TagEdge
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+scalar DateTime
+
+input DeleteConferenceInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteConferencePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conference: Conference
+  edge: ConferenceEdge
+  location: Location
+  deletedId: ID
+}
+
+input DeleteFileInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+  deletedId: ID
+}
+
+input DeleteLocationInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  location: Location
+  edge: LocationEdge
+  deletedId: ID
+}
+
+input DeleteTagInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteTagPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  tag: Tag
+  edge: TagEdge
+  deletedId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+  deletedId: ID
+}
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  secret: String!
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+# A connection to a list of items.
+type FileConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [FileEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type FileEdge {
+  # The item at the end of the edge.
+  node: File!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input FileFilter {
+  # Logical AND on all given filters.
+  AND: [FileFilter!]
+
+  # Logical OR on all given filters.
+  OR: [FileFilter!]
+  contentType: String
+
+  # All values that are not equal to given value.
+  contentType_not: String
+
+  # All values that are contained in given list.
+  contentType_in: [String!]
+
+  # All values that are not contained in given list.
+  contentType_not_in: [String!]
+
+  # All values less than the given value.
+  contentType_lt: String
+
+  # All values less than or equal the given value.
+  contentType_lte: String
+
+  # All values greater than the given value.
+  contentType_gt: String
+
+  # All values greater than or equal the given value.
+  contentType_gte: String
+
+  # All values containing the given string.
+  contentType_contains: String
+
+  # All values not containing the given string.
+  contentType_not_contains: String
+
+  # All values starting with the given string.
+  contentType_starts_with: String
+
+  # All values not starting with the given string.
+  contentType_not_starts_with: String
+
+  # All values ending with the given string.
+  contentType_ends_with: String
+
+  # All values not ending with the given string.
+  contentType_not_ends_with: String
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  secret: String
+
+  # All values that are not equal to given value.
+  secret_not: String
+
+  # All values that are contained in given list.
+  secret_in: [String!]
+
+  # All values that are not contained in given list.
+  secret_not_in: [String!]
+
+  # All values less than the given value.
+  secret_lt: String
+
+  # All values less than or equal the given value.
+  secret_lte: String
+
+  # All values greater than the given value.
+  secret_gt: String
+
+  # All values greater than or equal the given value.
+  secret_gte: String
+
+  # All values containing the given string.
+  secret_contains: String
+
+  # All values not containing the given string.
+  secret_not_contains: String
+
+  # All values starting with the given string.
+  secret_starts_with: String
+
+  # All values not starting with the given string.
+  secret_not_starts_with: String
+
+  # All values ending with the given string.
+  secret_ends_with: String
+
+  # All values not ending with the given string.
+  secret_not_ends_with: String
+  size: Int
+
+  # All values that are not equal to given value.
+  size_not: Int
+
+  # All values that are contained in given list.
+  size_in: [Int!]
+
+  # All values that are not contained in given list.
+  size_not_in: [Int!]
+
+  # All values less than the given value.
+  size_lt: Int
+
+  # All values less than or equal the given value.
+  size_lte: Int
+
+  # All values greater than the given value.
+  size_gt: Int
+
+  # All values greater than or equal the given value.
+  size_gte: Int
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  url: String
+
+  # All values that are not equal to given value.
+  url_not: String
+
+  # All values that are contained in given list.
+  url_in: [String!]
+
+  # All values that are not contained in given list.
+  url_not_in: [String!]
+
+  # All values less than the given value.
+  url_lt: String
+
+  # All values less than or equal the given value.
+  url_lte: String
+
+  # All values greater than the given value.
+  url_gt: String
+
+  # All values greater than or equal the given value.
+  url_gte: String
+
+  # All values containing the given string.
+  url_contains: String
+
+  # All values not containing the given string.
+  url_not_contains: String
+
+  # All values starting with the given string.
+  url_starts_with: String
+
+  # All values not starting with the given string.
+  url_not_starts_with: String
+
+  # All values ending with the given string.
+  url_ends_with: String
+
+  # All values not ending with the given string.
+  url_not_ends_with: String
+}
+
+enum FileOrderBy {
+  contentType_ASC
+  contentType_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  secret_ASC
+  secret_DESC
+  size_ASC
+  size_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+type Location implements Node {
+  address: String
+  city: String!
+  conferences(filter: ConferenceFilter, orderBy: ConferenceOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): ConferenceConnection
+  country: String
+  createdAt: DateTime!
+  id: ID!
+  name: String
+  postalCode: String
+  state: String!
+  updatedAt: DateTime!
+  url: String
+}
+
+input LocationconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  tagsIds: [ID!]
+  tags: [LocationconferencesConferencetagsTag!]
+}
+
+input LocationconferencesConferencetagsTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+  conferences: [LocationconferencesConferencetagsTagconferencesConference!]
+}
+
+input LocationconferencesConferencetagsTagconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  tagsIds: [ID!]
+}
+
+# A connection to a list of items.
+type LocationConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [LocationEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type LocationEdge {
+  # The item at the end of the edge.
+  node: Location!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input LocationFilter {
+  # Logical AND on all given filters.
+  AND: [LocationFilter!]
+
+  # Logical OR on all given filters.
+  OR: [LocationFilter!]
+  address: String
+
+  # All values that are not equal to given value.
+  address_not: String
+
+  # All values that are contained in given list.
+  address_in: [String!]
+
+  # All values that are not contained in given list.
+  address_not_in: [String!]
+
+  # All values less than the given value.
+  address_lt: String
+
+  # All values less than or equal the given value.
+  address_lte: String
+
+  # All values greater than the given value.
+  address_gt: String
+
+  # All values greater than or equal the given value.
+  address_gte: String
+
+  # All values containing the given string.
+  address_contains: String
+
+  # All values not containing the given string.
+  address_not_contains: String
+
+  # All values starting with the given string.
+  address_starts_with: String
+
+  # All values not starting with the given string.
+  address_not_starts_with: String
+
+  # All values ending with the given string.
+  address_ends_with: String
+
+  # All values not ending with the given string.
+  address_not_ends_with: String
+  city: String
+
+  # All values that are not equal to given value.
+  city_not: String
+
+  # All values that are contained in given list.
+  city_in: [String!]
+
+  # All values that are not contained in given list.
+  city_not_in: [String!]
+
+  # All values less than the given value.
+  city_lt: String
+
+  # All values less than or equal the given value.
+  city_lte: String
+
+  # All values greater than the given value.
+  city_gt: String
+
+  # All values greater than or equal the given value.
+  city_gte: String
+
+  # All values containing the given string.
+  city_contains: String
+
+  # All values not containing the given string.
+  city_not_contains: String
+
+  # All values starting with the given string.
+  city_starts_with: String
+
+  # All values not starting with the given string.
+  city_not_starts_with: String
+
+  # All values ending with the given string.
+  city_ends_with: String
+
+  # All values not ending with the given string.
+  city_not_ends_with: String
+  country: String
+
+  # All values that are not equal to given value.
+  country_not: String
+
+  # All values that are contained in given list.
+  country_in: [String!]
+
+  # All values that are not contained in given list.
+  country_not_in: [String!]
+
+  # All values less than the given value.
+  country_lt: String
+
+  # All values less than or equal the given value.
+  country_lte: String
+
+  # All values greater than the given value.
+  country_gt: String
+
+  # All values greater than or equal the given value.
+  country_gte: String
+
+  # All values containing the given string.
+  country_contains: String
+
+  # All values not containing the given string.
+  country_not_contains: String
+
+  # All values starting with the given string.
+  country_starts_with: String
+
+  # All values not starting with the given string.
+  country_not_starts_with: String
+
+  # All values ending with the given string.
+  country_ends_with: String
+
+  # All values not ending with the given string.
+  country_not_ends_with: String
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  postalCode: String
+
+  # All values that are not equal to given value.
+  postalCode_not: String
+
+  # All values that are contained in given list.
+  postalCode_in: [String!]
+
+  # All values that are not contained in given list.
+  postalCode_not_in: [String!]
+
+  # All values less than the given value.
+  postalCode_lt: String
+
+  # All values less than or equal the given value.
+  postalCode_lte: String
+
+  # All values greater than the given value.
+  postalCode_gt: String
+
+  # All values greater than or equal the given value.
+  postalCode_gte: String
+
+  # All values containing the given string.
+  postalCode_contains: String
+
+  # All values not containing the given string.
+  postalCode_not_contains: String
+
+  # All values starting with the given string.
+  postalCode_starts_with: String
+
+  # All values not starting with the given string.
+  postalCode_not_starts_with: String
+
+  # All values ending with the given string.
+  postalCode_ends_with: String
+
+  # All values not ending with the given string.
+  postalCode_not_ends_with: String
+  state: String
+
+  # All values that are not equal to given value.
+  state_not: String
+
+  # All values that are contained in given list.
+  state_in: [String!]
+
+  # All values that are not contained in given list.
+  state_not_in: [String!]
+
+  # All values less than the given value.
+  state_lt: String
+
+  # All values less than or equal the given value.
+  state_lte: String
+
+  # All values greater than the given value.
+  state_gt: String
+
+  # All values greater than or equal the given value.
+  state_gte: String
+
+  # All values containing the given string.
+  state_contains: String
+
+  # All values not containing the given string.
+  state_not_contains: String
+
+  # All values starting with the given string.
+  state_starts_with: String
+
+  # All values not starting with the given string.
+  state_not_starts_with: String
+
+  # All values ending with the given string.
+  state_ends_with: String
+
+  # All values not ending with the given string.
+  state_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  url: String
+
+  # All values that are not equal to given value.
+  url_not: String
+
+  # All values that are contained in given list.
+  url_in: [String!]
+
+  # All values that are not contained in given list.
+  url_not_in: [String!]
+
+  # All values less than the given value.
+  url_lt: String
+
+  # All values less than or equal the given value.
+  url_lte: String
+
+  # All values greater than the given value.
+  url_gt: String
+
+  # All values greater than or equal the given value.
+  url_gte: String
+
+  # All values containing the given string.
+  url_contains: String
+
+  # All values not containing the given string.
+  url_not_contains: String
+
+  # All values starting with the given string.
+  url_starts_with: String
+
+  # All values not starting with the given string.
+  url_not_starts_with: String
+
+  # All values ending with the given string.
+  url_ends_with: String
+
+  # All values not ending with the given string.
+  url_not_ends_with: String
+  conferences_every: ConferenceFilter
+  conferences_some: ConferenceFilter
+  conferences_none: ConferenceFilter
+}
+
+enum LocationOrderBy {
+  address_ASC
+  address_DESC
+  city_ASC
+  city_DESC
+  country_ASC
+  country_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  postalCode_ASC
+  postalCode_DESC
+  state_ASC
+  state_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+# The `Long` scalar type represents non-fractional signed whole numeric values.
+# Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long
+
+type Mutation {
+  createConference(input: CreateConferenceInput!): CreateConferencePayload
+  createFile(input: CreateFileInput!): CreateFilePayload
+  createLocation(input: CreateLocationInput!): CreateLocationPayload
+  createTag(input: CreateTagInput!): CreateTagPayload
+  updateConference(input: UpdateConferenceInput!): UpdateConferencePayload
+  updateFile(input: UpdateFileInput!): UpdateFilePayload
+  updateLocation(input: UpdateLocationInput!): UpdateLocationPayload
+  updateTag(input: UpdateTagInput!): UpdateTagPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateConference(input: UpdateOrCreateConferenceInput!): UpdateOrCreateConferencePayload
+  updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
+  updateOrCreateLocation(input: UpdateOrCreateLocationInput!): UpdateOrCreateLocationPayload
+  updateOrCreateTag(input: UpdateOrCreateTagInput!): UpdateOrCreateTagPayload
+  updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteConference(input: DeleteConferenceInput!): DeleteConferencePayload
+  deleteFile(input: DeleteFileInput!): DeleteFilePayload
+  deleteLocation(input: DeleteLocationInput!): DeleteLocationPayload
+  deleteTag(input: DeleteTagInput!): DeleteTagPayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  addToConferenceAtLocation(input: AddToConferenceAtLocationConferenceInput!): AddToConferenceAtLocationPayload
+  addToTagsForConferences(input: AddToTagsForConferencesConferenceInput!): AddToTagsForConferencesPayload
+  removeFromConferenceAtLocation(input: RemoveFromConferenceAtLocationConferenceInput!): RemoveFromConferenceAtLocationPayload
+  removeFromTagsForConferences(input: RemoveFromTagsForConferencesConferenceInput!): RemoveFromTagsForConferencesPayload
+  createUser(input: SignupUserInput!): CreateUserPayload!
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input RemoveFromConferenceAtLocationConferenceInput {
+  locationLocationId: ID!
+  conferencesConferenceId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromConferenceAtLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conferencesConference: Conference
+  locationLocation: Location
+  conferencesConferenceEdge: ConferenceEdge
+  locationLocationEdge: LocationEdge
+}
+
+input RemoveFromTagsForConferencesConferenceInput {
+  tagsTagId: ID!
+  conferencesConferenceId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromTagsForConferencesPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conferencesConference: Conference
+  tagsTag: Tag
+  conferencesConferenceEdge: ConferenceEdge
+  tagsTagEdge: TagEdge
+}
+
+input SignupUserInput {
+  clientMutationId: String!
+}
+
+type Tag implements Node {
+  conferences(filter: ConferenceFilter, orderBy: ConferenceOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): ConferenceConnection
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input TagconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  location: TagconferencesConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [TagconferencesConferencetagsTag!]
+}
+
+input TagconferencesConferencelocationLocation {
+  address: String
+  city: String!
+  country: String
+  name: String
+  postalCode: String
+  state: String!
+  url: String
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConferencelocationLocationconferencesConference!]
+}
+
+input TagconferencesConferencelocationLocationconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  tagsIds: [ID!]
+}
+
+input TagconferencesConferencetagsTag {
+  description: String
+  name: String!
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConferencetagsTagconferencesConference!]
+}
+
+input TagconferencesConferencetagsTagconferencesConference {
+  description: String!
+  end: DateTime!
+  name: String!
+  start: DateTime!
+  url: String
+  locationId: ID
+  tagsIds: [ID!]
+}
+
+# A connection to a list of items.
+type TagConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [TagEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type TagEdge {
+  # The item at the end of the edge.
+  node: Tag!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input TagFilter {
+  # Logical AND on all given filters.
+  AND: [TagFilter!]
+
+  # Logical OR on all given filters.
+  OR: [TagFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  description: String
+
+  # All values that are not equal to given value.
+  description_not: String
+
+  # All values that are contained in given list.
+  description_in: [String!]
+
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+
+  # All values less than the given value.
+  description_lt: String
+
+  # All values less than or equal the given value.
+  description_lte: String
+
+  # All values greater than the given value.
+  description_gt: String
+
+  # All values greater than or equal the given value.
+  description_gte: String
+
+  # All values containing the given string.
+  description_contains: String
+
+  # All values not containing the given string.
+  description_not_contains: String
+
+  # All values starting with the given string.
+  description_starts_with: String
+
+  # All values not starting with the given string.
+  description_not_starts_with: String
+
+  # All values ending with the given string.
+  description_ends_with: String
+
+  # All values not ending with the given string.
+  description_not_ends_with: String
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  conferences_every: ConferenceFilter
+  conferences_some: ConferenceFilter
+  conferences_none: ConferenceFilter
+}
+
+enum TagOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input UpdateConference {
+  description: String
+  end: DateTime
+  id: ID!
+  name: String
+  start: DateTime
+  url: String
+  locationId: ID
+  location: ConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [ConferencetagsTag!]
+}
+
+input UpdateConferenceInput {
+  description: String
+  end: DateTime
+  id: ID!
+  name: String
+  start: DateTime
+  url: String
+  locationId: ID
+  location: ConferencelocationLocation
+  tagsIds: [ID!]
+  tags: [ConferencetagsTag!]
+  clientMutationId: String!
+}
+
+type UpdateConferencePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conference: Conference
+  edge: ConferenceEdge
+  location: Location
+}
+
+input UpdateFile {
+  id: ID!
+  name: String
+}
+
+input UpdateFileInput {
+  id: ID!
+  name: String
+  clientMutationId: String!
+}
+
+type UpdateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input UpdateLocation {
+  address: String
+  city: String
+  country: String
+  id: ID!
+  name: String
+  postalCode: String
+  state: String
+  url: String
+  conferencesIds: [ID!]
+  conferences: [LocationconferencesConference!]
+}
+
+input UpdateLocationInput {
+  address: String
+  city: String
+  country: String
+  id: ID!
+  name: String
+  postalCode: String
+  state: String
+  url: String
+  conferencesIds: [ID!]
+  conferences: [LocationconferencesConference!]
+  clientMutationId: String!
+}
+
+type UpdateLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  location: Location
+  edge: LocationEdge
+}
+
+input UpdateOrCreateConferenceInput {
+  update: UpdateConference!
+  create: CreateConference!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateConferencePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  conference: Conference
+  edge: ConferenceEdge
+  location: Location
+}
+
+input UpdateOrCreateFileInput {
+  update: UpdateFile!
+  create: CreateFile!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input UpdateOrCreateLocationInput {
+  update: UpdateLocation!
+  create: CreateLocation!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateLocationPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  location: Location
+  edge: LocationEdge
+}
+
+input UpdateOrCreateTagInput {
+  update: UpdateTag!
+  create: CreateTag!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateTagPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  tag: Tag
+  edge: TagEdge
+}
+
+input UpdateOrCreateUserInput {
+  update: UpdateUser!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+input UpdateTag {
+  description: String
+  id: ID!
+  name: String
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConference!]
+}
+
+input UpdateTagInput {
+  description: String
+  id: ID!
+  name: String
+  conferencesIds: [ID!]
+  conferences: [TagconferencesConference!]
+  clientMutationId: String!
+}
+
+type UpdateTagPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  tag: Tag
+  edge: TagEdge
+}
+
+input UpdateUser {
+  id: ID!
+}
+
+input UpdateUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input UserFilter {
+  # Logical AND on all given filters.
+  AND: [UserFilter!]
+
+  # Logical OR on all given filters.
+  OR: [UserFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+}
+
+enum UserOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allConferences(filter: ConferenceFilter, orderBy: ConferenceOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): ConferenceConnection!
+  allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  allLocations(filter: LocationFilter, orderBy: LocationOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  allTags(filter: TagFilter, orderBy: TagOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): TagConnection!
+  allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user: User
+  Conference(id: ID): Conference
+  File(id: ID, secret: String, url: String): File
+  Location(id: ID): Location
+  Tag(id: ID): Tag
+  User(id: ID): User
+  id: ID!
+}
+

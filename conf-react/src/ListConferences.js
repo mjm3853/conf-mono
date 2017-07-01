@@ -1,27 +1,17 @@
+import {
+    createFragmentContainer,
+    graphql
+} from 'react-relay'
+
 import React from 'react'
 import Conference from './Conference'
-
-const mockConfData = [
-    {
-        node: {
-            id: "1",
-            name: "Test One",
-        }
-    },
-    {
-        node: {
-            id: "2",
-            name: "Second Test"
-        }
-    }
-]
 
 class ListConferences extends React.Component {
     render() {
         return (
             <div className='w-100 flex justify-center'>
                 <div className='w-100' style={{ maxWidth: 400 }}>
-                    {mockConfData.map(({ node }) =>
+                    {this.props.viewer.allConferences.edges.map(({ node }) =>
                         <Conference key={node.id} conference={node} />
                     )}
                 </div>
@@ -30,4 +20,14 @@ class ListConferences extends React.Component {
     }
 }
 
-export default ListConferences
+export default createFragmentContainer(ListConferences, graphql`
+    fragment ListConferences_viewer on Viewer {
+        allConferences(last: 100, orderBy: createdAt_DESC) @connection(key: "ListConferences_allConferences", filters: []) {
+            edges {
+                node {
+                    ...Conference_conference
+                }
+            }
+        }
+    }
+`)

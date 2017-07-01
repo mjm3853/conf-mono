@@ -1,3 +1,8 @@
+import {
+    createFragmentContainer,
+    graphql
+} from 'react-relay'
+
 import React from 'react'
 
 class Conference extends React.Component {
@@ -18,4 +23,9 @@ class Conference extends React.Component {
     }
 }
 
-export default Conference
+export default createFragmentContainer(Conference, graphql`
+    fragment Conference_conference on Conference {
+        id
+        name
+    }
+`)
