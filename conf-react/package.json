@@ -1,0 +1,9 @@
+{
+  "name": "conf-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react-relay": "^1.1.0"
+  }
+}
