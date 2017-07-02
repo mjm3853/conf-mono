@@ -53,7 +53,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div className="App">
           <div className="App-header">
-            <h2>Welcome to Conf-Apollo</h2>
+            <h2>Welcome to conf-apollo</h2>
           </div>
           <ConferencesListWithData />
         </div>

@@ -9,7 +9,8 @@
     "devServer": "cd conf-manager-service && npm start",
     "devClient": "cd conf-client && ng serve",
     "devAll": "concurrently \"npm run db\" \"npm run devServer\" \"npm run devClient\"",
-    "devReact": "cd conf-react && yarn start"
+    "devReact": "cd conf-react && yarn start",
+    "devApollo": "cd conf-apollo && yarn start"
   },
   "author": "Matt McGrath",
   "license": "ISC",
