@@ -65,7 +65,7 @@ class CreateConference extends React.Component {
 
                         )
                     }
-                    return <div>Loading...</div>
+                    return <div className='w-100 pa4 flex justify-center'>Loading...</div>
                 }}
             />
         )
