@@ -2,8 +2,8 @@ import {
     createFragmentContainer,
     graphql
 } from 'react-relay'
-
 import React from 'react'
+import DeleteConferenceMutation from './DeleteConferenceMutation'
 
 class Conference extends React.Component {
 
@@ -53,7 +53,7 @@ class Conference extends React.Component {
     }
 
     _handleDelete = () => {
-
+        DeleteConferenceMutation(this.props.conference.id, null);
     }
 }
 
