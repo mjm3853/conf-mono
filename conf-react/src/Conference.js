@@ -53,11 +53,15 @@ class Conference extends React.Component {
     }
 
     _handleDelete = () => {
-        DeleteConferenceMutation(this.props.conference.id, null);
+        DeleteConferenceMutation(this.props.conference.id, this.props.viewer.id);
     }
 }
 
 export default createFragmentContainer(Conference, graphql`
+    fragment Conference_viewer on Viewer {
+        id
+    }
+    
     fragment Conference_conference on Conference {
         id
         name

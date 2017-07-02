@@ -38,6 +38,11 @@ const fragment /*: ConcreteFragment*/ = {
   "name": "ListConferences_viewer",
   "selections": [
     {
+      "kind": "FragmentSpread",
+      "name": "Conference_viewer",
+      "args": null
+    },
+    {
       "kind": "LinkedField",
       "alias": "allConferences",
       "args": null,

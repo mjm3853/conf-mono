@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 775cda7909e5347e1dbb7346aadb2339
+ * @relayHash a47d07c0860b4f53804fbb08ab074c4b
  */
 
 /* eslint-disable */
@@ -24,6 +24,7 @@ query AppAllConferenceQuery {
 }
 
 fragment ListConferences_viewer on Viewer {
+  ...Conference_viewer
   allConferences(last: 100, orderBy: createdAt_DESC) {
     edges {
       node {
@@ -47,6 +48,10 @@ fragment ListConferences_viewer on Viewer {
       }
     }
   }
+}
+
+fragment Conference_viewer on Viewer {
+  id
 }
 
 fragment Conference_conference on Conference {
@@ -402,7 +407,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppAllConferenceQuery {\n  viewer {\n    ...ListConferences_viewer\n    id\n  }\n}\n\nfragment ListConferences_viewer on Viewer {\n  allConferences(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Conference_conference\n      }\n    }\n    ... on ConferenceConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Conference_conference on Conference {\n  id\n  name\n  description\n  start\n  end\n  location {\n    city\n    state\n    id\n  }\n  tags {\n    edges {\n      node {\n        id\n        name\n      }\n    }\n  }\n}\n"
+  "text": "query AppAllConferenceQuery {\n  viewer {\n    ...ListConferences_viewer\n    id\n  }\n}\n\nfragment ListConferences_viewer on Viewer {\n  ...Conference_viewer\n  allConferences(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Conference_conference\n      }\n    }\n    ... on ConferenceConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Conference_viewer on Viewer {\n  id\n}\n\nfragment Conference_conference on Conference {\n  id\n  name\n  description\n  start\n  end\n  location {\n    city\n    state\n    id\n  }\n  tags {\n    edges {\n      node {\n        id\n        name\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

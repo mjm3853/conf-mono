@@ -1,8 +1,8 @@
 import {
-  commitMutation,
-  graphql,
+    commitMutation,
+    graphql,
 } from 'react-relay'
-import {ConnectionHandler} from 'relay-runtime'
+import { ConnectionHandler } from 'relay-runtime'
 import environment from './Environment'
 
 const mutation = graphql`
@@ -26,10 +26,21 @@ export default (conferenceId, viewerId) => {
             mutation,
             variables,
             onError: err => console.error(err),
-            optimisticUpdater: (proxyStore) => {
-
-            },
             updater: (proxyStore) => {
+                const deleteConferenceField = proxyStore.getRootField('deleteConference')
+                const deletedId = deleteConferenceField.getValue('deletedId')
+                const viewerProxy = proxyStore.get(viewerId)
+                const connection = ConnectionHandler.getConnection(viewerProxy, 'ListConferences_allConferences')
+                if (connection) {
+                    ConnectionHandler.deleteNode(connection, deletedId)
+                }
+            },
+            optimisticUpdater: (proxyStore) => {
+                const viewerProxy = proxyStore.get(viewerId)
+                const connection = ConnectionHandler.getConnection(viewerProxy, 'ListConferences_allConferences')
+                if (connection) {
+                    ConnectionHandler.deleteNode(connection, conferenceId)
+                }
 
             }
         }

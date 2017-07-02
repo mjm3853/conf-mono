@@ -15,7 +15,7 @@ class ListConferences extends React.Component {
                 <Link to='/create' className='fixed bg-white top-0 right-0 pa4 ttu dim black no-underline'> + New Conference </Link>
                 <div className='w-100' style={{ maxWidth: 400 }}>
                     {this.props.viewer.allConferences.edges.map(({ node }) =>
-                        <Conference key={node.id} conference={node} />
+                        <Conference key={node.id} conference={node} viewer={this.props.viewer} />
                     )}
                 </div>
             </div>
@@ -25,6 +25,7 @@ class ListConferences extends React.Component {
 
 export default createFragmentContainer(ListConferences, graphql`
     fragment ListConferences_viewer on Viewer {
+        ...Conference_viewer
         allConferences(last: 100, orderBy: createdAt_DESC) @connection(key: "ListConferences_allConferences", filters: []) {
             edges {
                 node {
