@@ -28,7 +28,7 @@ class App extends Component {
           } else if (props) {
             return <ListConferences viewer={props.viewer} />
           }
-          return <div>Loading...</div>
+          return <div className='w-100 pa4 flex justify-center'>Loading...</div>
         }}
        />
     );
