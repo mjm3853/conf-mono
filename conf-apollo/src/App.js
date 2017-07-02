@@ -4,34 +4,33 @@ import {
   gql,
   graphql,
   ApolloProvider,
+  createNetworkInterface
 } from 'react-apollo'
 import {
   makeExecutableSchema,
   addMockFunctionsToSchema
 } from 'graphql-tools';
-import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 import { typeDefs } from './schema';
 import './App.css';
 
 const schema = makeExecutableSchema({ typeDefs });
 addMockFunctionsToSchema({ schema });
 
-const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
-
 const client = new ApolloClient({
-  networkInterface: mockNetworkInterface,
+  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/cj4l8kqb4zces0164cggch22m'),
 });
 
 const conferencesListQuery = gql`
   query ConferencesListQuery {
-    conferences {
+    allConferences {
       id
       name
+      description
     }
   }
 `;
 
-const ConferencesList = ({ data: { loading, error, conferences } }) => {
+const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -40,7 +39,12 @@ const ConferencesList = ({ data: { loading, error, conferences } }) => {
   }
 
   return <ul className="Item-list">
-    {conferences.map(conf => <li key={conf.id}>{conf.name}</li>)}
+    {allConferences
+      .map(conf => 
+        <li key={conf.id}>
+          <p>{conf.name}</p>
+          <p>{conf.description}</p>
+        </li>)}
   </ul>;
 };
 
