@@ -12,15 +12,40 @@ class Conference extends React.Component {
             <div className='pa3 bg-black-05 ma3'>
                 <div className='pt3'>
                     {this.props.conference.name}
-                    <p>{this.props.conference.description}</p>
-                    <p>{this.props.conference.location.city}, {this.props.conference.location.state}</p>
-                    <p>Start: {this.props.conference.start}</p>
-                    <p>End: {this.props.conference.end}</p>
+                    {this.props.conference.description ? (
+                        <p>{this.props.conference.description}</p>
+                    ) : (
+                            <p>No description provided</p>
+                        )}
+                    {this.props.conference.location ? (
+                        <p>{this.props.conference.location.city}, {this.props.conference.location.state}</p>
+                    ) : (
+                            <p>No location provided</p>
+                        )}
+                    {this.props.conference.start ? (
+                        <p>Start: {this.props.conference.start}</p>
+                    ) : (
+                            <p>No start time provided</p>
+                        )}
+                    {this.props.conference.end ? (
+                        <p>End: {this.props.conference.end}</p>
+                    ) : (
+                            <p>No end time provided</p>
+                        )}
                     <p>Tags</p>
-                    <ul>{this.props.conference.tags.edges.map(({node}) => 
-                        <li key={node.id}>{node.name}</li>
+                    {this.props.conference.tags ? (
+                        <ul>{this.props.conference.tags.edges.map(({ node }) =>
+                            <li key={node.id}>{node.name}</li>
                         )}
                         </ul>
+                    ) : (
+                            <p>No tags provided</p>
+                        )}
+                    {this.props.conference.url ? (
+                        <p>{this.props.conference.url}</p>
+                    ) : (
+                            <p>No url provided</p>
+                        )}
                     <span className='red f6 pointer dim' onClick={this._handleDelete}>Delete</span>
                 </div>
             </div>
