@@ -6,18 +6,10 @@ import {
   ApolloProvider,
   createNetworkInterface
 } from 'react-apollo'
-import {
-  makeExecutableSchema,
-  addMockFunctionsToSchema
-} from 'graphql-tools';
-import { typeDefs } from './schema';
 import './App.css';
 
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({ schema });
-
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/cj4l8kqb4zces0164cggch22m'),
+  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/conf-ql'),
 });
 
 const conferencesListQuery = gql`
