@@ -42,7 +42,6 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
 
 const ConferencesListWithData = graphql(conferencesListQuery)(ConferencesList);
 
-
 class App extends Component {
   render() {
     return (
