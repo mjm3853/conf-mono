@@ -9,64 +9,82 @@ import {
 import { withRouter } from 'react-router-dom'
 
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/conf-ql'),
+  networkInterface: createNetworkInterface(
+    { uri: 'https://api.graph.cool/simple/v1/conf-ql' }
+  )
 });
 
-const conferencesListQuery = gql`
-  query ConferencesListQuery {
-    allConferences {
-      id
-      name
-      description
-      start
-      end
-      location {
-        id
-        name
-        city
-        state
-        country
-        postalCode
-        address
-      }
-      tags {
-        id
-        name
-      }
-    }
+const createConferenceMutation = gql`
+  mutation createConference(
+    $name: String!,
+    $description: String!,
+    $start: DateTime!,
+    $end: DateTime!,
+    $locationName: String!,
+    $locationCity: String!,
+    $locationState: String!,
+    $tagName: String!
+  ) { createConference (
+    name: $name,
+    description: $description
+    start: $start,
+    end: $end,
+    location: {
+      name: $locationName,
+      city: $locationCity,
+      state: $locationState
+    },
+    tags: [
+      {name: $tagName}
+    ]
+  ) {
+    createdAt
   }
+}
 `;
 
-const ConferencesList = ({ data: { loading, error, allConferences } }) => {
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>{error.message}</p>;
-  }
-
-  return <ul className="pt5">
-    {allConferences
-      .map(conf =>
-        <article key={conf.id} className="center mw5 mw6-ns hidden ba mv4">
-          <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
-        </article>)}
-  </ul>;
+const CreateConference = ({ mutate }) => {
+  const handleKeyUp = (evt) => {
+    if (evt.keyCode === 13) {
+      evt.persist();
+      mutate({
+        variables: { 
+          name: evt.target.value,
+          description: "Submitted from input",
+          start: "2017-07-12T04:00:00.000Z",
+          end: "2017-07-12T04:00:00.000Z",
+          locationName: "InputLand",
+          locationCity: "abc",
+          locationState: "xyz",
+          tagName: "test"
+         }
+      })
+        .then(res => {
+          evt.target.value = '';
+        });
+    }
+  };
+  return (
+    <ul className="pt5">
+      <article className="center mw5 mw6-ns hidden ba mv4">
+        <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
+        <input
+          type="text"
+          placeholder="New channel"
+          onKeyUp={handleKeyUp}
+        />
+      </article>
+    </ul>
+  );
 };
 
-const ConferencesListWithData = graphql(conferencesListQuery)(ConferencesList);
-
-const CreateConferences = () => (
-  <div>
-    Create
-  </div>
-)
+const CreateConferenceWithData = graphql(createConferenceMutation)(CreateConference);
 
 class CreateConf extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-          <ConferencesListWithData />
+        <CreateConferenceWithData />
       </ApolloProvider>
     );
   }

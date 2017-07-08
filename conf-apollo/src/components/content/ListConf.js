@@ -9,7 +9,9 @@ import {
 import { withRouter } from 'react-router-dom'
 
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/conf-ql'),
+  networkInterface: createNetworkInterface(
+    { uri: 'https://api.graph.cool/simple/v1/conf-ql' }
+  )
 });
 
 const conferencesListQuery = gql`
@@ -67,17 +69,11 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
 
 const ConferencesListWithData = graphql(conferencesListQuery)(ConferencesList);
 
-const CreateConferences = () => (
-  <div>
-    Create
-  </div>
-)
-
 class ListConf extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-          <ConferencesListWithData />
+        <ConferencesListWithData />
       </ApolloProvider>
     );
   }
