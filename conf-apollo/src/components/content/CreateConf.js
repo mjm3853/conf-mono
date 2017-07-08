@@ -23,7 +23,7 @@ const createConferenceMutation = gql`
     $locationName: String!,
     $locationCity: String!,
     $locationState: String!,
-    $tagName: String!
+    $tags: [ConferencetagsTag!]
   ) { createConference (
     name: $name,
     description: $description
@@ -34,9 +34,7 @@ const createConferenceMutation = gql`
       city: $locationCity,
       state: $locationState
     },
-    tags: [
-      {name: $tagName}
-    ]
+    tags: $tags
   ) {
     createdAt
   }
@@ -56,7 +54,14 @@ const CreateConference = ({ mutate }) => {
           locationName: "InputLand",
           locationCity: "abc",
           locationState: "xyz",
-          tagName: "test"
+          tags: [
+            {
+              name: "first"
+            },
+            {
+              name: "second"
+            }
+          ]
          }
       })
         .then(res => {
