@@ -62,11 +62,13 @@ class CreateConference extends Component {
       ]
     }
   }
+
   handleNameChange(event) {
     this.setState({
       name: event.target.value
     });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.mutate({
