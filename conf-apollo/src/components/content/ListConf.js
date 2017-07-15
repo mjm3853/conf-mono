@@ -35,7 +35,7 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
                   )}
               </div>
             </div>
-            <DeleteConf />
+            <DeleteConf confId={conf.id} />
           </article>)
     }
   </ul>;

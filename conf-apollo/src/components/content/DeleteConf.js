@@ -5,17 +5,36 @@ import {
 } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import apolloConnect from '../connections/apolloConnect';
-import deleteConferenceMutation from '../queries/deleteConferenceMutation'
+import deleteConferenceMutation from '../queries/deleteConferenceMutation';
+import conferencesListQuery from '../queries/conferencesListQuery';
 
 const client = apolloConnect;
 
 class DeleteConference extends Component {
-    constructor() {
-        super()
+  constructor(){
+    super()
+    this.state = {
+      deleteEnabled: true
     }
-    render () {
-        return <div>DELETE BUTTON PLACEHOLDER</div>
-    }
+  }
+
+  handleDelete(event) {
+    this.setState({
+      deleteEnabled: false
+    })
+    this.props.mutate({
+      variables: {
+        id: this.props.confId
+      },
+      refetchQueries: [
+        { query: conferencesListQuery }
+      ]
+    })
+  }
+
+  render() {
+    return <button name="delete" disabled={!this.state.deleteEnabled} onClick={this.handleDelete.bind(this)}>DELETE BUTTON PLACEHOLDER</button>
+  }
 }
 
 const DeleteConferenceWithData = graphql(deleteConferenceMutation)(DeleteConference);
@@ -23,8 +42,8 @@ const DeleteConferenceWithData = graphql(deleteConferenceMutation)(DeleteConfere
 class DeleteConf extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <DeleteConferenceWithData />
+      <ApolloProvider client={client} confId={this.props.confId}>
+        <DeleteConferenceWithData confId={this.props.confId} />
       </ApolloProvider>
     );
   }

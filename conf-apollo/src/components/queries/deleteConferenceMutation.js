@@ -2,10 +2,12 @@ import { gql } from 'react-apollo';
 
 const deleteConferenceMutation = gql`
   mutation deleteConference(
-    $id: String!
+    $id: ID!
   ) { deleteConference (
     id: $id
-  )
+  ) {
+    id
+  }
 }
 `;
 
