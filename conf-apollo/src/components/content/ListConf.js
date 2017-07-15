@@ -1,43 +1,18 @@
 import React, { Component } from 'react';
 import {
   ApolloClient,
-  gql,
   graphql,
   ApolloProvider,
   createNetworkInterface
 } from 'react-apollo';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import conferencesListQuery from '../queries/conferencesListQuery';
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface(
     { uri: 'https://api.graph.cool/simple/v1/conf-ql' }
   )
 });
-
-const conferencesListQuery = gql`
-  query ConferencesListQuery {
-    allConferences {
-      id
-      name
-      description
-      start
-      end
-      location {
-        id
-        name
-        city
-        state
-        country
-        postalCode
-        address
-      }
-      tags {
-        id
-        name
-      }
-    }
-  }
-`;
 
 const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   if (loading) {
