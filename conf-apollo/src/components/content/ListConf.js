@@ -67,7 +67,11 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   </ul>;
 };
 
-const ConferencesListWithData = graphql(conferencesListQuery)(ConferencesList);
+const ConferencesListWithData = graphql(conferencesListQuery, {
+  options: {
+    fetchPolicy: 'cache-and-network'
+  }
+})(ConferencesList);
 
 class ListConf extends Component {
   render() {
