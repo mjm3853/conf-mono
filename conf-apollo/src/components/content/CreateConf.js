@@ -5,7 +5,7 @@ import {
 } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import createConferenceMutation from '../queries/createConferenceMutation';
-import apolloConnect from '../connections/apolloConnect'; 
+import apolloConnect from '../connections/apolloConnect';
 
 const client = apolloConnect;
 
@@ -14,7 +14,7 @@ class CreateConference extends Component {
     super();
     this.state = {
       name: "",
-      description: "Submitted from Form",
+      description: "",
       start: "2017-07-12T04:00:00.000Z",
       end: "2017-07-12T04:00:00.000Z",
       locationName: "InputLand",
@@ -37,6 +37,24 @@ class CreateConference extends Component {
     });
   }
 
+  handleDescriptionChange(event) {
+    this.setState({
+      description: event.target.value
+    });
+  }
+
+  handleStartChange(event) {
+    this.setState({
+      start: event.target.value
+    });
+  }
+
+  handleEndChange(event) {
+    this.setState({
+      end: event.target.value
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.mutate({
@@ -53,7 +71,10 @@ class CreateConference extends Component {
     })
       .then(res => {
         this.setState({
-          name: ""
+          name: "",
+          description: "",
+          start: "",
+          end: ""
         })
       });
   }
@@ -62,10 +83,22 @@ class CreateConference extends Component {
       <form className="pt5" onSubmit={this.handleSubmit.bind(this)}>
         <div className="center mw5 mw6-ns hidden ba mv4">
           <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
-          <label>
-            Name:
-          <input type="text" onChange={this.handleNameChange.bind(this)} value={this.state.name} />
+          <label>Name:
+          <input type="text" name="name" onChange={this.handleNameChange.bind(this)} value={this.state.name} />
           </label>
+          <br />
+          <label>Description:
+            <input type="text" name="description" onChange={this.handleDescriptionChange.bind(this)} value={this.state.description} />
+          </label>
+          <br />
+          <label>Start:
+            <input type="text" name="start" onChange={this.handleStartChange.bind(this)} value={this.state.start} />
+          </label>
+          <br />
+          <label>End:
+            <input type="text" name="end" onChange={this.handleStartChange.bind(this)} value={this.state.end} />
+          </label>
+          <br />
           <input type="submit" value="Submit" />
         </div>
       </form>
