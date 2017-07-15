@@ -41,7 +41,7 @@ const conferencesListQuery = gql`
 
 const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   if (loading) {
-    return <p className="center pt5">Loading...</p>;
+    return <p className="center mw5 pt6">Loading...</p>;
   }
   if (error) {
     return <p className="center mw5 pt6">{error.message}</p>;
