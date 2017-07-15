@@ -31,27 +31,11 @@ class CreateConference extends Component {
     }
   }
 
-  handleNameChange(event) {
+  handleChange(event) {
+    let property = event.target.name;
+    let value = event.target.value;
     this.setState({
-      name: event.target.value
-    });
-  }
-
-  handleDescriptionChange(event) {
-    this.setState({
-      description: event.target.value
-    });
-  }
-
-  handleStartChange(event) {
-    this.setState({
-      start: event.target.value
-    });
-  }
-
-  handleEndChange(event) {
-    this.setState({
-      end: event.target.value
+      [property]: value
     });
   }
 
@@ -84,19 +68,19 @@ class CreateConference extends Component {
         <div className="center mw5 mw6-ns hidden ba mv4">
           <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
           <label>Name:
-          <input type="text" name="name" onChange={this.handleNameChange.bind(this)} value={this.state.name} />
+          <input type="text" name="name" onChange={this.handleChange.bind(this)} value={this.state.name} />
           </label>
           <br />
           <label>Description:
-            <input type="text" name="description" onChange={this.handleDescriptionChange.bind(this)} value={this.state.description} />
+            <input type="text" name="description" onChange={this.handleChange.bind(this)} value={this.state.description} />
           </label>
           <br />
           <label>Start:
-            <input type="text" name="start" onChange={this.handleStartChange.bind(this)} value={this.state.start} />
+            <input type="text" name="start" onChange={this.handleChange.bind(this)} value={this.state.start} />
           </label>
           <br />
           <label>End:
-            <input type="text" name="end" onChange={this.handleStartChange.bind(this)} value={this.state.end} />
+            <input type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.end} />
           </label>
           <br />
           <input type="submit" value="Submit" />
