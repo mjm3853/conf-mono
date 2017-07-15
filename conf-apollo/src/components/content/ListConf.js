@@ -5,6 +5,7 @@ import {
 } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import conferencesListQuery from '../queries/conferencesListQuery';
+import DeleteConf from './DeleteConf';
 import apolloConnect from '../connections/apolloConnect';
 
 const client = apolloConnect;
@@ -34,6 +35,7 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
                   )}
               </div>
             </div>
+            <DeleteConf />
           </article>)
     }
   </ul>;
