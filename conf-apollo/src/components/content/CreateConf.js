@@ -1,45 +1,13 @@
 import React, { Component } from 'react';
 import {
-  ApolloClient,
-  gql,
   graphql,
-  ApolloProvider,
-  createNetworkInterface
+  ApolloProvider
 } from 'react-apollo';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import createConferenceMutation from '../queries/createConferenceMutation';
+import apolloConnect from '../connections/apolloConnect'; 
 
-const client = new ApolloClient({
-  networkInterface: createNetworkInterface(
-    { uri: 'https://api.graph.cool/simple/v1/conf-ql' }
-  )
-});
-
-const createConferenceMutation = gql`
-  mutation createConference(
-    $name: String!,
-    $description: String!,
-    $start: DateTime!,
-    $end: DateTime!,
-    $locationName: String!,
-    $locationCity: String!,
-    $locationState: String!,
-    $tags: [ConferencetagsTag!]
-  ) { createConference (
-    name: $name,
-    description: $description
-    start: $start,
-    end: $end,
-    location: {
-      name: $locationName,
-      city: $locationCity,
-      state: $locationState
-    },
-    tags: $tags
-  ) {
-    createdAt
-  }
-}
-`;
+const client = apolloConnect;
 
 class CreateConference extends Component {
   constructor() {
