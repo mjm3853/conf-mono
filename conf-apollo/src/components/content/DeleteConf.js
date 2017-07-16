@@ -33,7 +33,7 @@ class DeleteConference extends Component {
   }
 
   render() {
-    return <button name="delete" disabled={!this.state.deleteEnabled} onClick={this.handleDelete.bind(this)}>DELETE BUTTON PLACEHOLDER</button>
+    return <button name="delete" disabled={!this.state.deleteEnabled} onClick={this.handleDelete.bind(this)}>Delete</button>
   }
 }
 
