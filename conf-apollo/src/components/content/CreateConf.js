@@ -4,6 +4,11 @@ import {
   ApolloProvider
 } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import createConferenceMutation from '../queries/createConferenceMutation';
 import apolloConnect from '../connections/apolloConnect';
 
@@ -15,11 +20,13 @@ class CreateConference extends Component {
     this.state = {
       name: "",
       description: "",
-      start: "2017-07-12T04:00:00.000Z",
-      end: "2017-07-12T04:00:00.000Z",
-      locationName: "InputLand",
-      locationCity: "abc",
-      locationState: "xyz",
+      start: "",
+      startDisplay: moment(),
+      end: "",
+      endDisplay: moment(),
+      locationName: "",
+      locationCity: "",
+      locationState: "",
       tags: [
         {
           name: "Form"
@@ -36,6 +43,22 @@ class CreateConference extends Component {
     let value = event.target.value;
     this.setState({
       [property]: value
+    });
+  }
+
+  handleStartChange(date) {
+    let formattedDate = date.utc().format();
+    this.setState({
+      start: formattedDate,
+      startDisplay: date
+    });
+  }
+
+  handleEndChange(date) {
+    let formattedDate = date.utc().format();
+    this.setState({
+      end: formattedDate,
+      endDisplay: date
     });
   }
 
@@ -58,7 +81,13 @@ class CreateConference extends Component {
           name: "",
           description: "",
           start: "",
-          end: ""
+          startDisplay: moment(),
+          end: "",
+          endDisplay: moment(),
+          locationName: "",
+          locationCity: "",
+          locationState: "",
+          tags: []
         })
       });
   }
@@ -74,23 +103,29 @@ class CreateConference extends Component {
             <label className="ph2 f6 b db mb2">Description:
             <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="description" onChange={this.handleChange.bind(this)} value={this.state.description} />
             </label>
-            <label className="ph2 f6 b db mb2">Start:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="start" onChange={this.handleChange.bind(this)} value={this.state.start} />
+            <label className="w3 ph2 f6 b db mb2">Start:
+            <DatePicker
+                selected={this.state.startDisplay}
+                onChange={this.handleStartChange.bind(this)}
+              />
             </label>
-            <label className="ph2 f6 b db mb2">End:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.end} />
+            <label className="w3 ph2 f6 b db mb2">End:
+            <DatePicker
+                selected={this.state.endDisplay}
+                onChange={this.handleEndChange.bind(this)}
+              />
             </label>
             <label className="ph2 f6 b db mb2">Location Name:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.locationName} />
+            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationName" onChange={this.handleChange.bind(this)} value={this.state.locationName} />
             </label>
             <label className="ph2 f6 b db mb2">Location City:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.locationCity} />
+            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationCity" onChange={this.handleChange.bind(this)} value={this.state.locationCity} />
             </label>
             <label className="ph2 f6 b db mb2">Location State:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.locationState} />
+            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationState" onChange={this.handleChange.bind(this)} value={this.state.locationState} />
             </label>
             <label className="ph2 f6 b db mb2">Tags:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="end" onChange={this.handleChange.bind(this)} value={this.state.tags} />
+            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="tags" onChange={this.handleChange.bind(this)} value={this.state.tags} />
             </label>
             <input className="ml2 ph2 f6 b mb2" type="submit" value="Submit" />
           </div>
