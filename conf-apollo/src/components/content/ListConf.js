@@ -29,7 +29,7 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
               <div className="pa3 bt">
                 <p className="f6 f5-ns lh-copy measure mv0">{conf.description}</p>
                 <p className="f6 f5-ns lh-copy measure mv0">From {formatDate(conf.start)} to {formatDate(conf.end)}</p>
-                <p className="f6 f5-ns lh-copy measure mv0">{conf.location.city}, {conf.location.state}</p>
+                <p className="f6 f5-ns lh-copy measure mv0">{conf.location.name}</p>
                 <div>
                   {conf.tags
                     .map(tag =>

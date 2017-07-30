@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 import createConferenceMutation from '../queries/createConferenceMutation';
 import apolloConnect from '../connections/apolloConnect';
@@ -20,9 +21,9 @@ class CreateConference extends Component {
     this.state = {
       name: "",
       description: "",
-      start: "",
+      start: moment().utc().format(),
       startDisplay: moment(),
-      end: "",
+      end: moment().utc().format(),
       endDisplay: moment(),
       locationName: "",
       locationCity: "",
@@ -36,6 +37,7 @@ class CreateConference extends Component {
         }
       ]
     }
+    this.onAddressChange = (locationName) => this.setState({ locationName });
   }
 
   handleChange(event) {
@@ -80,18 +82,24 @@ class CreateConference extends Component {
         this.setState({
           name: "",
           description: "",
-          start: "",
+          start: moment().utc().format(),
           startDisplay: moment(),
-          end: "",
+          end: moment().utc().format(),
           endDisplay: moment(),
           locationName: "",
-          locationCity: "",
-          locationState: "",
           tags: []
         })
       });
   }
+
   render() {
+    const addressInput = {
+      value: this.state.locationName,
+      onChange: this.onAddressChange,
+      type: 'search',
+      placeholder: 'Enter the address...'
+    }
+
     return (
       <div className="pt5">
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -116,13 +124,7 @@ class CreateConference extends Component {
               />
             </label>
             <label className="ph2 f6 b db mb2">Location Name:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationName" onChange={this.handleChange.bind(this)} value={this.state.locationName} />
-            </label>
-            <label className="ph2 f6 b db mb2">Location City:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationCity" onChange={this.handleChange.bind(this)} value={this.state.locationCity} />
-            </label>
-            <label className="ph2 f6 b db mb2">Location State:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="locationState" onChange={this.handleChange.bind(this)} value={this.state.locationState} />
+            <PlacesAutocomplete className="input-reset ba b--black-20 pa2 mb2 db w-100" name="locationName" inputProps={addressInput} />
             </label>
             <label className="ph2 f6 b db mb2">Tags:
             <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="tags" onChange={this.handleChange.bind(this)} value={this.state.tags} />
