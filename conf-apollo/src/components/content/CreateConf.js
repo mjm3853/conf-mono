@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  graphql,
-  ApolloProvider
-} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 import DatePicker from 'react-datepicker';
@@ -11,9 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PlacesAutocomplete from 'react-places-autocomplete'
 
 import createConferenceMutation from '../queries/createConferenceMutation';
-import apolloConnect from '../connections/apolloConnect';
-
-const client = apolloConnect;
 
 class CreateConference extends Component {
   constructor() {
@@ -178,9 +172,7 @@ const CreateConferenceWithData = graphql(createConferenceMutation)(CreateConfere
 class CreateConf extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <CreateConferenceWithData />
-      </ApolloProvider>
+      <CreateConferenceWithData />
     );
   }
 }

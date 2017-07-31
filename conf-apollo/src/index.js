@@ -8,13 +8,19 @@ import {
     BrowserRouter,
     Route
 } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import apolloConnect from './components/connections/apolloConnect';
+
+const client = apolloConnect;
 
 ReactDOM.render(
-    <BrowserRouter>
-        <div>
-            <Header />
-            <Route exact path='/' component={ListConf} />
-            <Route path='/create' component={CreateConf} />
-        </div>
-    </BrowserRouter>, document.getElementById('root'));
+    <ApolloProvider client={client}>
+        <BrowserRouter>
+            <div>
+                <Header />
+                <Route exact path='/' component={ListConf} />
+                <Route path='/create' component={CreateConf} />
+            </div>
+        </BrowserRouter>
+    </ApolloProvider>, document.getElementById('root'));
 registerServiceWorker();

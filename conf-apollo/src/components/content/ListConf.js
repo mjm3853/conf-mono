@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import {
-  graphql,
-  ApolloProvider
-} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { formatDate } from '../utils/format';
 import conferencesListQuery from '../queries/conferencesListQuery';
 import DeleteConf from './DeleteConf';
-import apolloConnect from '../connections/apolloConnect';
-
-const client = apolloConnect;
 
 const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   if (loading) {
@@ -51,9 +45,7 @@ const ConferencesListWithData = graphql(conferencesListQuery, {
 class ListConf extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <ConferencesListWithData />
-      </ApolloProvider>
+      <ConferencesListWithData />
     );
   }
 }
