@@ -26,10 +26,10 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
           .map(conf =>
             <article key={conf.id} className="center mw5 mw7-ns hidden ba mv4">
               <h1 className="f4 bg-near-black white mv0 pv2 ph3">{conf.name}</h1>
-              <div className="pa3 bt">
-                <p className="f6 f5-ns lh-copy measure mv0">{conf.description}</p>
-                <p className="f6 f5-ns lh-copy measure mv0">From {formatDate(conf.start)} to {formatDate(conf.end)}</p>
-                <p className="f6 f5-ns lh-copy measure mv0">{conf.location.name}</p>
+              <div className="pa4 bt">
+                <p className="f6 f5-ns lh-copy mv0">{conf.description}</p>
+                <p className="f6 f5-ns lh-copy mv0">From {formatDate(conf.start)} to {formatDate(conf.end)}</p>
+                <p className="f6 f5-ns lh-copy mv0">{conf.location.name}</p>
                 <div>
                   {conf.tags
                     .map(tag =>

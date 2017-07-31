@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import PlacesAutocomplete from 'react-places-autocomplete'
 
 import createConferenceMutation from '../queries/createConferenceMutation';
 import apolloConnect from '../connections/apolloConnect';
@@ -28,14 +28,8 @@ class CreateConference extends Component {
       locationName: "",
       locationCity: "",
       locationState: "",
-      tags: [
-        {
-          name: "Form"
-        },
-        {
-          name: "Apollo"
-        }
-      ]
+      tags: [],
+      tag: ""
     }
     this.onAddressChange = (locationName) => this.setState({ locationName });
   }
@@ -64,6 +58,36 @@ class CreateConference extends Component {
     });
   }
 
+  handleTagAdd(event) {
+    event.preventDefault();
+    let newTagValue = this.state.tag;
+    let newTag = {
+      name: newTagValue
+    }
+    this.setState({
+      tags: [...this.state.tags, newTag],
+      tag: ""
+    })
+  }
+
+  handleTagRemove(event) {
+    event.preventDefault();
+    if (this.state.tags.length > 0) {
+      let tagIndexToRemove = this.state.tags.length - 1;
+      if (this.state.tags.length === 1) {
+        this.setState({
+          tags: []
+        })
+      } else {
+        this.setState((prevState) => {
+          return {
+            tags: prevState.tags.filter(tag => tag.name !== prevState.tags[tagIndexToRemove].name)
+          }
+        })
+      }
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.mutate({
@@ -87,7 +111,8 @@ class CreateConference extends Component {
           end: moment().utc().format(),
           endDisplay: moment(),
           locationName: "",
-          tags: []
+          tags: [],
+          tag: ""
         })
       });
   }
@@ -127,7 +152,18 @@ class CreateConference extends Component {
             <PlacesAutocomplete className="input-reset ba b--black-20 pa2 mb2 db w-100" name="locationName" inputProps={addressInput} />
             </label>
             <label className="ph2 f6 b db mb2">Tags:
-            <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="tags" onChange={this.handleChange.bind(this)} value={this.state.tags} />
+              <div className="db">
+                <input className="input-reset ba b--black-20 pa2 mb2 w-25" type="text" name="tag" onChange={this.handleChange.bind(this)} value={this.state.tag} />
+                <input className="ml2 ph2 f6 b" type="button" onClick={this.handleTagAdd.bind(this)} value="+" />
+                <input className="ml2 ph2 f6 b" type="button" onClick={this.handleTagRemove.bind(this)} value="-" />
+              </div>
+              <ul>
+                {this.state.tags.map((tag, index) =>
+                  <li className="f6 link dim br-pill ba ph3 pv2 mr1 mb2 dib black" key={index}>
+                    {tag.name}
+                  </li>
+                )}
+              </ul>
             </label>
             <input className="ml2 ph2 f6 b mb2" type="submit" value="Submit" />
           </div>
