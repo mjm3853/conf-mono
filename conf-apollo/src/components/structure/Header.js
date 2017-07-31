@@ -22,7 +22,13 @@ class Header extends Component {
 
   render() {
     if (this.props.data.loading) {
-      return (<div>Loading</div>)
+      return (
+        <header className="bg-black-90 fixed w-100 ph3 pv3 top-0 pv4-ns ph4-m ph5-l">
+        <nav className="f6 fw6 ttu tracked">
+          <Link className="pa3 link dim white dib mr3" to="/" title="Home">Home</Link>
+        </nav>
+      </header>
+      )
     }
 
     if (this._isLoggedIn()) {
