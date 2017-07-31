@@ -13,7 +13,7 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
     return <p className="center mw5 pt6">{error.message}</p>;
   }
 
-  return <div className="pt5">
+  return <div className="pt6">
     <ul>
       {
         allConferences
@@ -31,7 +31,9 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
                     )}
                 </div>
               </div>
-              <DeleteConf confId={conf.id} />
+              <div>
+                <DeleteConf confId={conf.id} />
+              </div>
             </article>)
       }
     </ul>

@@ -120,7 +120,7 @@ class CreateConference extends Component {
     }
 
     return (
-      <div className="pt5">
+      <div className="pt6">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="center mw5 mw6-ns hidden ba mv4">
             <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
