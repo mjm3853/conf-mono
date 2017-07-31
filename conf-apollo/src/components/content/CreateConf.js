@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, gql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 import DatePicker from 'react-datepicker';
@@ -10,8 +10,8 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import createConferenceMutation from '../queries/createConferenceMutation';
 
 class CreateConference extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       description: "",
@@ -111,7 +111,29 @@ class CreateConference extends Component {
       });
   }
 
+  _isLoggedIn = () => {
+    return this.props.data.user
+  }
+
   render() {
+    if (this.props.data.loading) {
+      return (
+        <div className="pt6">
+            <div className="center mw5 mw7-ns hidden ba mv4">
+              <h1 className="f4 bg-near-black white mv0 pv2 ph3">Loading...</h1>
+            </div>
+        </div>
+      )
+    }
+
+    if (this._isLoggedIn()) {
+      return this.renderCreateAllowed()
+    } else {
+      return this.renderCreateBlocked()
+    }
+  }
+
+  renderCreateAllowed() {
     const addressInput = {
       value: this.state.locationName,
       onChange: this.onAddressChange,
@@ -165,16 +187,30 @@ class CreateConference extends Component {
       </div>
     );
   }
+
+  renderCreateBlocked() {
+    return (
+      <div className="center mw5 mw6-ns mv4 pt6">Must be logged in to Create a Conference</div>
+    )
+  }
 }
+
+const userQuery = gql`
+  query {
+    user {
+      id
+    }
+  }
+`
 
 const CreateConferenceWithData = graphql(createConferenceMutation)(CreateConference);
 
 class CreateConf extends Component {
   render() {
     return (
-      <CreateConferenceWithData />
+      <CreateConferenceWithData data={this.props.data} />
     );
   }
 }
 
-export default withRouter(CreateConf);
+export default graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(withRouter(CreateConf));
