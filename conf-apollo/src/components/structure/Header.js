@@ -3,6 +3,7 @@ import LoginAuth0 from './LoginAuth0';
 import { graphql, gql } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import config from '../../config/config';
+import StaticHeader from './StaticHeader';
 
 const clientId = config.auth0.clientId;
 const domain = config.auth0.domain;
@@ -23,11 +24,7 @@ class Header extends Component {
   render() {
     if (this.props.data.loading) {
       return (
-        <header className="bg-black-90 fixed w-100 ph3 pv3 top-0 pv4-ns ph4-m ph5-l">
-        <nav className="f6 fw6 ttu tracked">
-          <Link className="pa3 link dim white dib mr3" to="/" title="Home">Home</Link>
-        </nav>
-      </header>
+        <StaticHeader />
       )
     }
 
@@ -41,8 +38,8 @@ class Header extends Component {
   renderLoggedIn() {
     return (
       <header className="bg-black-90 fixed w-100 ph3 pv3 top-0 pv4-ns ph4-m ph5-l">
-        <nav className="f6 fw6 ttu tracked">
-          <Link className="pa3 link dim white dib mr3" to="/" title="Home">Home</Link>
+        <nav className="f6 ttu tracked">
+          <Link className="f4 pa3 link dim white dib mr3" to="/" title="Home">Conf.io</Link>
           <Link className="pa3 link dim white dib mr3" to="/create" title="Create">Create</Link>
           <div className='dib fr'>
             <span
@@ -60,8 +57,8 @@ class Header extends Component {
   renderLoggedOut() {
     return (
       <header className="bg-black-90 fixed w-100 ph3 pv3 top-0 pv4-ns ph4-m ph5-l">
-        <nav className="f6 fw6 ttu tracked">
-          <Link className="pa3 link dim white dib mr3" to="/" title="Home">Home</Link>
+        <nav className="f6 ttu tracked">
+          <Link className="f4 pa3 link dim white dib mr3" to="/" title="Home">Conf.io</Link>
           <div className='dib fr'>
             <LoginAuth0
               clientId={clientId}
