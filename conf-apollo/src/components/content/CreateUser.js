@@ -57,9 +57,11 @@ class CreateUser extends React.Component {
     this.props.createUser({ variables })
       .then((response) => {
           this.props.history.replace('/')
+          window.location.reload()
       }).catch((e) => {
         console.error(e)
         this.props.history.replace('/')
+        window.location.reload()
       })
   }
 }
