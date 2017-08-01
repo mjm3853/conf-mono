@@ -8,11 +8,9 @@ import DeleteConf from './DeleteConf';
 const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   if (loading) {
     return <div className="pt6">
-      <ul>
         <article className="center mw5 mw7-ns hidden ba mv4">
           <h1 className="f4 bg-near-black white mv0 pv2 ph3">Loading...</h1>
         </article>
-      </ul>
     </div>;
   }
   if (error) {

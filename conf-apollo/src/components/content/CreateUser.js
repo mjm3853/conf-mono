@@ -6,8 +6,7 @@ class CreateUser extends React.Component {
 
   state = {
     emailAddress: '',
-    name: '',
-    emailSubscription: false,
+    name: ''
   }
 
   render () {
@@ -40,18 +39,6 @@ class CreateUser extends React.Component {
             placeholder='Name'
             onChange={(e) => this.setState({name: e.target.value})}
           />
-          <div>
-            <input
-              className='w-100 pa3 mv2'
-              value={this.state.emailSubscription}
-              type='checkbox'
-              onChange={(e) => this.setState({emailSubscription: e.target.checked})}
-            />
-            <span>
-              Subscribe to email notifications?
-            </span>
-          </div>
-
           {this.state.name &&
           <button className='pa3 bg-black-10 bn dim ttu pointer' onClick={this.createUser}>Sign up</button>
           }
@@ -64,8 +51,7 @@ class CreateUser extends React.Component {
     const variables = {
       idToken: window.localStorage.getItem('auth0IdToken'),
       emailAddress: this.state.emailAddress,
-      name: this.state.name,
-      emailSubscription: this.state.emailSubscription,
+      name: this.state.name
     }
 
     this.props.createUser({ variables })
@@ -80,7 +66,7 @@ class CreateUser extends React.Component {
 
 const createUser = gql`
   mutation ($idToken: String!, $name: String!, $emailAddress: String!, $emailSubscription: Boolean!){
-    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddress, emailSubscription: $emailSubscription) {
+    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddressn) {
       id
     }
   }

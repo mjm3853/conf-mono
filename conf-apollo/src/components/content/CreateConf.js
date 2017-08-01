@@ -144,7 +144,7 @@ class CreateConference extends Component {
     return (
       <div className="pt6">
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <div className="center mw5 mw6-ns hidden ba mv4">
+          <div className="center mw5 mw7-ns hidden ba mv4">
             <h1 className="f4 bg-near-black white mv0 pv2 ph3">Create Conference</h1>
             <label className="ph2 pt2 f6 b db mb2">Name:
             <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" name="name" onChange={this.handleChange.bind(this)} value={this.state.name} />
