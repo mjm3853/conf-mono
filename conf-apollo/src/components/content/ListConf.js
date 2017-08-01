@@ -20,7 +20,6 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
   }
 
   return <div className="pt6">
-    <ul>
       {
         allConferences
           .map(conf =>
@@ -42,7 +41,6 @@ const ConferencesList = ({ data: { loading, error, allConferences } }) => {
               </div>
             </article>)
       }
-    </ul>
   </div>
 };
 

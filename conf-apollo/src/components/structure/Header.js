@@ -43,7 +43,7 @@ class Header extends Component {
           <Link className="pa3 link dim white dib mr3" to="/create" title="Create">Create</Link>
           <div className='dib fr'>
             <span
-              className='dib bg-red white pa3 pointer dim'
+              className='dib f6 bg-red white pa3 pointer dim'
               onClick={this._logout}
             >
               Logout
